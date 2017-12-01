@@ -7,12 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		186934CF1FD0F398000E94B3 /* Todos.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 186934CD1FD0F398000E94B3 /* Todos.xcdatamodeld */; };
-		186934D11FD104E6000E94B3 /* AddTodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186934D01FD104E6000E94B3 /* AddTodoViewController.swift */; };
 		18D914A11FCFAE0E005B571A /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D914A01FCFAE0E005B571A /* CalendarCell.swift */; };
 		18D914A31FCFAE8C005B571A /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D914A21FCFAE8C005B571A /* CalendarViewController.swift */; };
-		18D914A71FD0807E005B571A /* CalendarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D914A61FD0807E005B571A /* CalendarTableViewCell.swift */; };
-		18F81E591FD0A53A00DFA8AA /* TodoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F81E571FD0A53A00DFA8AA /* TodoTableViewController.swift */; };
 		960BAEE3062789E5AEBB1F3A /* Pods_CalendarApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B28E26F0DC25C53EBC50E2AA /* Pods_CalendarApp.framework */; };
 		D0065A381FCF6C0C00978E46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0065A371FCF6C0C00978E46 /* AppDelegate.swift */; };
 		D0065A3A1FCF6C0C00978E46 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0065A391FCF6C0C00978E46 /* ViewController.swift */; };
@@ -37,12 +33,8 @@
 
 /* Begin PBXFileReference section */
 		0919D87D8D605C4E7529B515 /* Pods_CalendarAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CalendarAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		186934CE1FD0F398000E94B3 /* Todos.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Todos.xcdatamodel; sourceTree = "<group>"; };
-		186934D01FD104E6000E94B3 /* AddTodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoViewController.swift; sourceTree = "<group>"; };
 		18D914A01FCFAE0E005B571A /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
 		18D914A21FCFAE8C005B571A /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
-		18D914A61FD0807E005B571A /* CalendarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTableViewCell.swift; sourceTree = "<group>"; };
-		18F81E571FD0A53A00DFA8AA /* TodoTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoTableViewController.swift; sourceTree = "<group>"; };
 		29172DBAC839EFE4A5DCC744 /* Pods-CalendarApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CalendarApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CalendarApp/Pods-CalendarApp.debug.xcconfig"; sourceTree = "<group>"; };
 		7830476CB266CF29B22820F3 /* Pods-CalendarAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CalendarAppTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CalendarAppTests/Pods-CalendarAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		862C9FE696D569F59B9BC056 /* Pods-CalendarApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CalendarApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-CalendarApp/Pods-CalendarApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -88,19 +80,8 @@
 			children = (
 				18D914A01FCFAE0E005B571A /* CalendarCell.swift */,
 				18D914A21FCFAE8C005B571A /* CalendarViewController.swift */,
-				18D914A61FD0807E005B571A /* CalendarTableViewCell.swift */,
 			);
 			path = Calendar;
-			sourceTree = "<group>";
-		};
-		18F81E501FD0A46C00DFA8AA /* Todo */ = {
-			isa = PBXGroup;
-			children = (
-				18F81E571FD0A53A00DFA8AA /* TodoTableViewController.swift */,
-				186934CD1FD0F398000E94B3 /* Todos.xcdatamodeld */,
-				186934D01FD104E6000E94B3 /* AddTodoViewController.swift */,
-			);
-			path = Todo;
 			sourceTree = "<group>";
 		};
 		19FD4979A94C7A9AC5EDE763 /* Pods */ = {
@@ -147,7 +128,6 @@
 		D0065A361FCF6C0C00978E46 /* CalendarApp */ = {
 			isa = PBXGroup;
 			children = (
-				18F81E501FD0A46C00DFA8AA /* Todo */,
 				18D914971FCFA87F005B571A /* Calendar */,
 				D0065A371FCF6C0C00978E46 /* AppDelegate.swift */,
 				D0065A391FCF6C0C00978E46 /* ViewController.swift */,
@@ -381,12 +361,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				18D914A31FCFAE8C005B571A /* CalendarViewController.swift in Sources */,
-				186934CF1FD0F398000E94B3 /* Todos.xcdatamodeld in Sources */,
 				18D914A11FCFAE0E005B571A /* CalendarCell.swift in Sources */,
 				D0065A401FCF6C0C00978E46 /* CalendarApp.xcdatamodeld in Sources */,
-				18D914A71FD0807E005B571A /* CalendarTableViewCell.swift in Sources */,
-				186934D11FD104E6000E94B3 /* AddTodoViewController.swift in Sources */,
-				18F81E591FD0A53A00DFA8AA /* TodoTableViewController.swift in Sources */,
 				D0065A3A1FCF6C0C00978E46 /* ViewController.swift in Sources */,
 				D0065A381FCF6C0C00978E46 /* AppDelegate.swift in Sources */,
 			);
@@ -634,16 +610,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		186934CD1FD0F398000E94B3 /* Todos.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				186934CE1FD0F398000E94B3 /* Todos.xcdatamodel */,
-			);
-			currentVersion = 186934CE1FD0F398000E94B3 /* Todos.xcdatamodel */;
-			path = Todos.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
 		D0065A3E1FCF6C0C00978E46 /* CalendarApp.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (

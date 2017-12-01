@@ -10,8 +10,6 @@ import UIKit
 import JTAppleCalendar
 
 class CalendarCell: JTAppleCell {
-    
-    //MARK: - Outlets
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var selectedView: UIView!
 }

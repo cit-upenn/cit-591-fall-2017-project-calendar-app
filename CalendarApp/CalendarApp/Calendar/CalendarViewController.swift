@@ -10,12 +10,9 @@ import UIKit
 import JTAppleCalendar
 
 class CalendarViewController: UIViewController {
-    
-    //MARK: - Outlets
     @IBOutlet weak var calendarView: JTAppleCalendarView!
     @IBOutlet weak var year: UILabel!
     @IBOutlet weak var month: UILabel!
-    @IBOutlet weak var calendarTableView: UITableView!
     
     //MARK: - Properties
     let monthColor = UIColor.darkGray
@@ -26,7 +23,6 @@ class CalendarViewController: UIViewController {
     // TODO: change to fetch event from coredata
     var eventsFromServer: [String:String] = [:]
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -35,7 +31,6 @@ class CalendarViewController: UIViewController {
         calendarView.selectDates([todaysDate])
     }
     
-    //MARK: - Actions
     func setupCalendarView(){
         //setup calendar spacing
         calendarView.minimumLineSpacing = 0
@@ -90,7 +85,6 @@ class CalendarViewController: UIViewController {
     }
 }
 
-//MARK: - calendar view data source
 extension CalendarViewController: JTAppleCalendarViewDataSource{
     func calendar(_ calendar: JTAppleCalendarView, willDisplay cell: JTAppleCell, forItemAt date: Date, cellState: CellState, indexPath: IndexPath) {
         let cell = calendar.dequeueReusableJTAppleCell(withReuseIdentifier: "CalendarCell", for: indexPath) as! CalendarCell
@@ -114,8 +108,6 @@ extension CalendarViewController: JTAppleCalendarViewDataSource{
     }
 }
 
-
-// MARK: - calendar view delegate
 extension CalendarViewController: JTAppleCalendarViewDelegate {
     
     //display the cell
@@ -152,8 +144,6 @@ extension CalendarViewController: JTAppleCalendarViewDelegate {
     }
 }
 
-//MARK: - fetch data
-//TODO: define get data from coredata
 extension CalendarViewController{
     func getServerEvents() -> [Date:String] {
         formatter.dateFormat = "yyyy MM dd"
@@ -169,7 +159,6 @@ extension CalendarViewController{
     }
 }
 
-// MARK: - UIColor
 extension UIColor {
     convenience init(colorWithHexValue value: Int, alpha:CGFloat = 1.0) {
         self.init (
