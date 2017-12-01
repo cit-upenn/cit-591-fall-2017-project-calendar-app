@@ -172,18 +172,30 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="1Kt-QY-NNl">
-                                <rect key="frame" x="16" y="10" width="343" height="500"/>
+                                <rect key="frame" x="16" y="30" width="343" height="480"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SFB-nC-rtm">
+                                <rect key="frame" x="30" y="5" width="315" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="wbz-Q2-Ewd"/>
+                                </constraints>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="1Kt-QY-NNl" firstAttribute="leading" secondItem="Suh-3S-nkq" secondAttribute="leading" constant="16" id="8E5-9F-TZC"/>
-                            <constraint firstItem="1Kt-QY-NNl" firstAttribute="top" secondItem="Suh-3S-nkq" secondAttribute="top" constant="10" id="NCQ-bS-A1A"/>
+                            <constraint firstItem="1Kt-QY-NNl" firstAttribute="top" secondItem="Suh-3S-nkq" secondAttribute="top" constant="30" id="NCQ-bS-A1A"/>
                             <constraint firstItem="1Kt-QY-NNl" firstAttribute="trailing" secondItem="Suh-3S-nkq" secondAttribute="trailing" constant="-16" id="Q4L-d3-EFy"/>
                             <constraint firstItem="Suh-3S-nkq" firstAttribute="bottom" secondItem="1Kt-QY-NNl" secondAttribute="bottom" id="Wt4-nn-cuf"/>
+                            <constraint firstItem="SFB-nC-rtm" firstAttribute="leading" secondItem="Suh-3S-nkq" secondAttribute="leading" constant="30" id="bZh-gp-rOQ"/>
+                            <constraint firstItem="Suh-3S-nkq" firstAttribute="trailing" secondItem="SFB-nC-rtm" secondAttribute="trailing" constant="30" id="f6B-lh-HUN"/>
+                            <constraint firstItem="SFB-nC-rtm" firstAttribute="top" secondItem="Suh-3S-nkq" secondAttribute="top" constant="5" id="ftX-Cg-IQB"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Suh-3S-nkq"/>
                     </view>
@@ -197,6 +209,7 @@
                     </toolbarItems>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="dateField" destination="SFB-nC-rtm" id="Jvp-Fz-2ee"/>
                         <outlet property="saveButton" destination="bKg-ly-MUf" id="2ux-Wr-ryY"/>
                         <outlet property="textView" destination="1Kt-QY-NNl" id="Ih4-vj-bS0"/>
                     </connections>

@@ -108,9 +108,7 @@ class EntriesTableViewController: UITableViewController, UISearchBarDelegate {
         
         return cell
     }
-    
-   
-    
+
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
@@ -139,9 +137,7 @@ class EntriesTableViewController: UITableViewController, UISearchBarDelegate {
         delete.backgroundColor = UIColor(red: 36/255, green: 39/255, blue: 148/255, alpha: 1.0)
         return [delete]
     }
-    
-    
-    
+ 
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation

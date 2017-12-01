@@ -16,7 +16,8 @@ class UpdateJournalViewController: UIViewController, UITextViewDelegate {
 
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var textView: UITextView!
-
+    @IBOutlet weak var dateField: UITextField!
+    
     @IBAction func saveClick(_ sender: Any) {
         guard let updateText = textView.text else {
             return
@@ -48,17 +49,14 @@ class UpdateJournalViewController: UIViewController, UITextViewDelegate {
             return
         }
         textView.text = existedEntry
+        if let existedDate = entry.createdAt {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateStyle = .medium
+            dateFormatter.timeStyle = .short
+            dateField.text = dateFormatter.string(from: existedDate)
+            dateField.textColor = UIColor.lightGray
+        } else {
+            dateField.text = ""
+        }  
     }
-
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
