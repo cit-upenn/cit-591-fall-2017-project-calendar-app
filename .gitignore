@@ -1,0 +1,5 @@
+
+*.plist
+*.xcuserstate
+CalendarApp/.DS_Store
+CalendarApp/CalendarApp.xcworkspace/xcuserdata/olivia_aosun.xcuserdatad/UserInterfaceState.xcuserstate
