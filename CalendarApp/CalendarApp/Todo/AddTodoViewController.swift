@@ -12,13 +12,13 @@ import CoreData
 class AddTodoViewController: UIViewController {
 
     @IBOutlet weak var textView: UITextView!
-    
     @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
     //MARK: - Properties
-    var managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var managedContext: NSManagedObjectContext!
+        //= (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var todo: Todo!
    
     override func viewDidLoad() {
@@ -29,8 +29,6 @@ class AddTodoViewController: UIViewController {
             selector: #selector(keyboardWillShow(with:)),
             name: .UIKeyboardWillShow,
             object: nil)
-        
-        textView.becomeFirstResponder()
         
         if let todo = todo {
             textView.text = todo.title
@@ -96,10 +94,18 @@ class AddTodoViewController: UIViewController {
         }
         
     }
+    
+    @IBAction func setDueDate(_ sender:UIButton) {
+        print("set due date!")
+    }
+    
 }
+
 
 extension AddTodoViewController: UITextViewDelegate {
     func textViewDidChangeSelection(_ textView: UITextView) {
+        textView.becomeFirstResponder()
+        
         if doneButton.isHidden{
             textView.text.removeAll()
             textView.textColor = .white
