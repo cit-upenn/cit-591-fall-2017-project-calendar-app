@@ -24,7 +24,6 @@ class TodoTableViewController: UITableViewController {
         let sortDescriptor1 = NSSortDescriptor(key: "setupDate", ascending: true)
         let sortDescriptor2 = NSSortDescriptor(key: "title", ascending: true)
         
-        
         // Init
         request.sortDescriptors = [sortDescriptor1, sortDescriptor2]
         resultsController = NSFetchedResultsController(
@@ -41,7 +40,6 @@ class TodoTableViewController: UITableViewController {
         } catch {
             print("Perform fetch error: \(error)")
         }
-        
     }
 
     // MARK: - Table view data source
@@ -55,6 +53,9 @@ class TodoTableViewController: UITableViewController {
         
         let todo = resultsController.object(at: indexPath)
         cell.textLabel?.text = todo.title
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        cell.detailTextLabel?.text = dateFormatter.string(from: todo.setupDate!)
 
         return cell
     }

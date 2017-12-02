@@ -18,7 +18,7 @@ class AddTodoViewController: UIViewController {
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
     //MARK: - Properties
-    var managedContext: NSManagedObjectContext!
+    var managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var todo: Todo!
    
     override func viewDidLoad() {
@@ -78,6 +78,18 @@ class AddTodoViewController: UIViewController {
         }
         do {
             try managedContext.save()
+            
+            let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Todo")
+            request.returnsObjectsAsFaults = false
+            do {
+                let result = try managedContext.fetch(request)
+                for data in result as! [NSManagedObject] {
+                    print(data)
+                }
+            } catch {
+                print("Failed")
+            }
+            
             dismissAndResign()
         } catch {
             print("Error saving todo: \(error)" )
