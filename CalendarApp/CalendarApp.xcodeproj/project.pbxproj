@@ -18,10 +18,10 @@
 		D0065A451FCF6C0C00978E46 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0065A431FCF6C0C00978E46 /* LaunchScreen.storyboard */; };
 		D0065A501FCF6C0C00978E46 /* CalendarAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0065A4F1FCF6C0C00978E46 /* CalendarAppTests.swift */; };
 		D0065A5A1FCF785F00978E46 /* JTAppleCalendar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0065A5B1FCF785F00978E46 /* JTAppleCalendar.framework */; };
-		D0065A5D1FCFAFCA00978E46 /* journal-512.png in Resources */ = {isa = PBXBuildFile; fileRef = D0065A5C1FCFAFCA00978E46 /* journal-512.png */; };
 		D01198981FCFB3CD00D9F917 /* EntriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01198951FCFB3CD00D9F917 /* EntriesTableViewController.swift */; };
 		D01198991FCFB3CD00D9F917 /* AddEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01198961FCFB3CD00D9F917 /* AddEntryViewController.swift */; };
 		D011989A1FCFB3CD00D9F917 /* UpdateJournalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01198971FCFB3CD00D9F917 /* UpdateJournalViewController.swift */; };
+		D011989C1FD301E600D9F917 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D011989B1FD301E600D9F917 /* TableViewCell.swift */; };
 		F87DE626F951B4E64BEC18BC /* Pods_CalendarAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0919D87D8D605C4E7529B515 /* Pods_CalendarAppTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -56,10 +56,10 @@
 		D0065A4F1FCF6C0C00978E46 /* CalendarAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarAppTests.swift; sourceTree = "<group>"; };
 		D0065A511FCF6C0C00978E46 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D0065A5B1FCF785F00978E46 /* JTAppleCalendar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = JTAppleCalendar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D0065A5C1FCFAFCA00978E46 /* journal-512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "journal-512.png"; path = "../../../../../../Downloads/journal-512.png"; sourceTree = "<group>"; };
 		D01198951FCFB3CD00D9F917 /* EntriesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntriesTableViewController.swift; sourceTree = "<group>"; };
 		D01198961FCFB3CD00D9F917 /* AddEntryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEntryViewController.swift; sourceTree = "<group>"; };
 		D01198971FCFB3CD00D9F917 /* UpdateJournalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateJournalViewController.swift; sourceTree = "<group>"; };
+		D011989B1FD301E600D9F917 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +88,7 @@
 			children = (
 				18D914A01FCFAE0E005B571A /* CalendarCell.swift */,
 				18D914A21FCFAE8C005B571A /* CalendarViewController.swift */,
+				D011989B1FD301E600D9F917 /* TableViewCell.swift */,
 			);
 			path = Calendar;
 			sourceTree = "<group>";
@@ -143,7 +144,6 @@
 				D0065A371FCF6C0C00978E46 /* AppDelegate.swift */,
 				D0065A391FCF6C0C00978E46 /* ViewController.swift */,
 				D0065A3B1FCF6C0C00978E46 /* Main.storyboard */,
-				D0065A5C1FCFAFCA00978E46 /* journal-512.png */,
 				D0065A411FCF6C0C00978E46 /* Assets.xcassets */,
 				D0065A431FCF6C0C00978E46 /* LaunchScreen.storyboard */,
 				D0065A461FCF6C0C00978E46 /* Info.plist */,
@@ -252,7 +252,6 @@
 			files = (
 				D0065A451FCF6C0C00978E46 /* LaunchScreen.storyboard in Resources */,
 				D0065A421FCF6C0C00978E46 /* Assets.xcassets in Resources */,
-				D0065A5D1FCFAFCA00978E46 /* journal-512.png in Resources */,
 				D0065A3D1FCF6C0C00978E46 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -376,6 +375,7 @@
 				18D914A31FCFAE8C005B571A /* CalendarViewController.swift in Sources */,
 				18D914A11FCFAE0E005B571A /* CalendarCell.swift in Sources */,
 				D01198981FCFB3CD00D9F917 /* EntriesTableViewController.swift in Sources */,
+				D011989C1FD301E600D9F917 /* TableViewCell.swift in Sources */,
 				D0065A401FCF6C0C00978E46 /* CalendarApp.xcdatamodeld in Sources */,
 				D0065A3A1FCF6C0C00978E46 /* ViewController.swift in Sources */,
 				D01198991FCFB3CD00D9F917 /* AddEntryViewController.swift in Sources */,

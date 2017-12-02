@@ -22,7 +22,6 @@ class EntriesTableViewController: UITableViewController, UISearchBarDelegate {
         
         setupSearchBar()
         setupNavBar()
-        
     }
     
     func setupNavBar(){

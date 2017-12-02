@@ -8,17 +8,25 @@
 
 import UIKit
 import JTAppleCalendar
+import CoreData
 
 class CalendarViewController: UIViewController {
     @IBOutlet weak var calendarView: JTAppleCalendarView!
     @IBOutlet weak var year: UILabel!
     @IBOutlet weak var month: UILabel!
+    @IBOutlet weak var tableView: UITableView!
     
     //MARK: - Properties
     let monthColor = UIColor.darkGray
     let selectedMonthColor = UIColor.black
     let formatter = DateFormatter()
     let todaysDate = Date()
+    
+    //Core Data
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var entries: [Entry] = []
+    var todayJournal: [Entry] = []
+//    var todayToDo: [ToDo] = []
     
     // TODO: change to fetch event from coredata
     var eventsFromServer: [String:String] = [:]
@@ -83,6 +91,7 @@ class CalendarViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
 }
 
 extension CalendarViewController: JTAppleCalendarViewDataSource{
@@ -170,4 +179,36 @@ extension UIColor {
     }
 }
 
+extension CalendarViewController: UITableViewDataSource, UITableViewDelegate{
+    
+    // MARK: - Table view data source
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    //only journal now, need to add todo data
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return entries.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "tableCell", for: indexPath)
+        
+        cell.textLabel?.text = entries.reversed()[indexPath.row].bodyText
+        
+        if let date = entries.reversed()[indexPath.row].createdAt {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateStyle = .medium
+            dateFormatter.timeStyle = .short
+            cell.detailTextLabel?.text = dateFormatter.string(from: date)
+        } else {
+            cell.detailTextLabel?.text = ""
+        }
+        
+        return cell
+    }
+    
+    
+}
 
