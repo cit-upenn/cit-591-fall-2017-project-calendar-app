@@ -24,7 +24,7 @@ class CalendarViewController: UIViewController {
     var selectedDate = Date()
     var selectedRow: Int!
     
-    //Core Data
+    //MARK: - Core Data
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var entries: [Entry] = []
     var todayJournal: [Entry] = []
@@ -245,6 +245,19 @@ extension CalendarViewController: UITableViewDataSource, UITableViewDelegate{
         performSegue(withIdentifier: "updateJournalFromCalendar", sender: self)
         
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let delete = UITableViewRowAction(style: .default, title: "Delete") { (action, indexPath) in
+            
+            let entry = self.todayJournal.reversed()[indexPath.row]
+            self.context.delete(entry)
+            (UIApplication.shared.delegate as! AppDelegate).saveContext()
+            
+            self.fetchData()
+        }
+        delete.backgroundColor = UIColor(red: 36/255, green: 39/255, blue: 148/255, alpha: 1.0)
+        return [delete]
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

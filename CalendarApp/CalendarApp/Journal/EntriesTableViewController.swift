@@ -137,8 +137,7 @@ class EntriesTableViewController: UITableViewController, UISearchBarDelegate {
             self.context.delete(entry)
             (UIApplication.shared.delegate as! AppDelegate).saveContext()
             
-            self.filterEntries.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .automatic)
+            self.fetchEntries()
         }
         delete.backgroundColor = UIColor(red: 36/255, green: 39/255, blue: 148/255, alpha: 1.0)
         return [delete]

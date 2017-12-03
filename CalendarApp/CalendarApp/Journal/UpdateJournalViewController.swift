@@ -16,7 +16,8 @@ class UpdateJournalViewController: UIViewController, UITextViewDelegate {
 
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var textView: UITextView!
-    @IBOutlet weak var dateField: UITextField!
+    @IBOutlet weak var dateLabel: UILabel!
+    
     
     @IBAction func saveClick(_ sender: Any) {
         guard let updateText = textView.text else {
@@ -56,10 +57,10 @@ class UpdateJournalViewController: UIViewController, UITextViewDelegate {
             let dateFormatter = DateFormatter()
             dateFormatter.dateStyle = .medium
             dateFormatter.timeStyle = .short
-            dateField.text = dateFormatter.string(from: existedDate)
-            dateField.textColor = UIColor.lightGray
+            dateLabel.text = dateFormatter.string(from: existedDate)
+            dateLabel.textColor = UIColor.lightGray
         } else {
-            dateField.text = ""
+            dateLabel.text = ""
         }  
     }
 }
