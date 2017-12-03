@@ -11,21 +11,24 @@ import CoreData
 
 class TodoTableViewController: UITableViewController {
 
+    @IBOutlet weak var showCompleted: UIBarButtonItem!
     // MARK: - Properties
     
     var resultsController: NSFetchedResultsController<Todo>!
     var managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Request
         let request: NSFetchRequest<Todo> = Todo.fetchRequest()
-        let sortDescriptor1 = NSSortDescriptor(key: "setupDate", ascending: true)
+        let sortDescriptor1 = NSSortDescriptor(key: "dueDate", ascending: true)
         let sortDescriptor2 = NSSortDescriptor(key: "title", ascending: true)
         
         // Init
         request.sortDescriptors = [sortDescriptor1, sortDescriptor2]
+        request.predicate = NSPredicate(format: "complete == false")
         resultsController = NSFetchedResultsController(
             fetchRequest: request,
             managedObjectContext: managedContext,
@@ -40,6 +43,7 @@ class TodoTableViewController: UITableViewController {
         } catch {
             print("Perform fetch error: \(error)")
         }
+    
     }
 
     // MARK: - Table view data source
@@ -53,10 +57,30 @@ class TodoTableViewController: UITableViewController {
         
         let todo = resultsController.object(at: indexPath)
         cell.textLabel?.text = todo.title
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        cell.detailTextLabel?.text = dateFormatter.string(from: todo.setupDate!)
-
+        if (todo.dueDate == nil) {
+            cell.detailTextLabel?.text = ""
+        } else {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            cell.detailTextLabel?.text = dateFormatter.string(from: todo.dueDate!)
+            //set due date color to red if past due
+            if (todo.dueDate?.compare(Date()).rawValue == -1){
+                cell.detailTextLabel?.textColor = .red
+            }
+        }
+        if todo.complete{
+            cell.textLabel?.textColor = UIColor.lightGray
+            cell.detailTextLabel?.textColor = UIColor.lightGray
+        } else {
+            cell.textLabel?.textColor = .black
+            cell.detailTextLabel?.textColor = .black
+        }
+        if (todo.reminderDate != nil) {
+            let image = #imageLiteral(resourceName: "bell-512")
+            let imageView = UIImageView(image: image)
+            imageView.frame = CGRect(x: 340, y: 15, width: 30, height: 30)
+            cell.contentView.addSubview(imageView)
+        }
         return cell
     }
     
@@ -82,9 +106,10 @@ class TodoTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let action = UIContextualAction(style: .normal, title: "Check") { ( action, view, completion) in
             let todo = self.resultsController.object(at: indexPath)
-            self.resultsController.managedObjectContext.delete(todo)
+            todo.complete = true
             do {
                 try self.resultsController.managedObjectContext.save()
+                tableView.reloadData()
                 completion(true)
             } catch {
                 print("Check failed: \(error)")
@@ -116,6 +141,29 @@ class TodoTableViewController: UITableViewController {
             }
         }
     }
+    
+    @IBAction func showCompleted(_ sender: UIBarButtonItem) {
+        if sender.title == "Show Completed" {
+            
+            NSFetchedResultsController<NSFetchRequestResult>.deleteCache(withName: nil)
+            resultsController.fetchRequest.predicate = nil
+            
+            sender.title = "Hide Completed"
+        } else {
+            
+            NSFetchedResultsController<NSFetchRequestResult>.deleteCache(withName: nil)
+            resultsController.fetchRequest.predicate = NSPredicate(format: "complete == false")
+
+            sender.title = "Show Completed"
+        }
+        do {
+            try resultsController.performFetch()
+            tableView.reloadData()
+        } catch {
+            print("Perform fetch error: \(error)")
+        }
+        
+    }
 }
 
 extension TodoTableViewController:NSFetchedResultsControllerDelegate {
@@ -130,22 +178,19 @@ extension TodoTableViewController:NSFetchedResultsControllerDelegate {
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         switch type {
         case .insert:
-            if let indexPath = newIndexPath {
-                tableView.insertRows(at: [indexPath], with: .automatic)
-            }
+            tableView.insertRows(at: [newIndexPath!], with: .automatic)
         case .delete:
-            if let indexPath = indexPath {
-                tableView.deleteRows(at: [indexPath], with: .automatic)
-            }
+            tableView.deleteRows(at: [indexPath!], with: .automatic)
         case .update:
-            if let indexPath = indexPath, let cell = tableView.cellForRow(at: indexPath) {
-                let todo = resultsController.object(at: indexPath)
-                cell.textLabel?.text = todo.title
-            }
+            tableView.reloadRows(at: [indexPath!], with: .automatic)
+        case .move:
+            tableView.moveRow(at: indexPath!, to: newIndexPath!)
+            tableView.reloadData()
         default:
             break
         }
     }
+
 }
 
 

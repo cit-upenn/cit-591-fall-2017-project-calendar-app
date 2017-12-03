@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -259,10 +258,9 @@
             </objects>
             <point key="canvasLocation" x="121" y="1101"/>
         </scene>
-        <!--All Tasks-->
+        <!--Todo-->
         <scene sceneID="hk3-7l-j5d">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="lc8-Lf-Obe" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="wit-Q8-Nj8" customClass="TodoTableViewController" customModule="CalendarApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="0gI-aG-beg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -272,7 +270,7 @@
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TodoCell" textLabel="N0g-By-q8h" detailTextLabel="lWQ-ma-ZAe" style="IBUITableViewCellStyleSubtitle" id="1hK-pD-TCT">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1hK-pD-TCT" id="1Pt-ny-TfQ">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1hK-pD-TCT" id="1Pt-ny-TfQ">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
@@ -299,7 +297,14 @@
                             <outlet property="delegate" destination="wit-Q8-Nj8" id="Beu-UA-Xu1"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="All Tasks" id="r5N-I5-Ykn">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Todo" id="r5N-I5-Ykn">
+                        <barButtonItem key="leftBarButtonItem" title="Show Completed" id="8Tw-33-GMi">
+                            <color key="tintColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="showCompleted:" destination="wit-Q8-Nj8" id="1Eh-Xc-ZJN"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Add" id="UB5-Br-vJt">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
@@ -307,9 +312,14 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="showCompleted" destination="8Tw-33-GMi" id="OJy-Mn-BIa"/>
+                    </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lc8-Lf-Obe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="921" y="199"/>
+            <point key="canvasLocation" x="920.79999999999995" y="198.35082458770617"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="wCt-TQ-Ixb">
@@ -333,7 +343,6 @@
         <!--Todo-->
         <scene sceneID="5YX-37-cD1">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gCe-Na-HKX" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="XRY-OH-u1q" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Todo" id="2lq-Uz-nhr"/>
                     <toolbarItems/>
@@ -351,6 +360,7 @@
                         <segue destination="wit-Q8-Nj8" kind="relationship" relationship="rootViewController" id="iea-r2-JQL"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gCe-Na-HKX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="121" y="200"/>
         </scene>
@@ -358,15 +368,46 @@
         <scene sceneID="geX-Cd-4jU">
             <objects>
                 <viewController id="8Bu-Y8-yWB" customClass="AddTodoViewController" customModule="CalendarApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="40M-Ea-Mlp">
+                    <view key="view" contentMode="scaleToFill" id="40M-Ea-Mlp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="iFP-gO-OcT">
-                                <rect key="frame" x="0.0" y="20" width="375" height="300"/>
+                            <stackView hidden="YES" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Kbm-b1-04P" userLabel="Date Selector">
+                                <rect key="frame" x="0.0" y="407" width="375" height="260"/>
                                 <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="245" ambiguous="YES" text="Enter your todo here..." translatesAutoresizingMaskIntoConstraints="NO" id="KSP-jM-nPZ">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="260"/>
+                                    <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HdH-5e-4er">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                        <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <items>
+                                            <navigationItem title="Select a date" id="xIt-qG-g7a" userLabel="Select a due date">
+                                                <barButtonItem key="leftBarButtonItem" title="Cancel" id="m9u-f9-J8D">
+                                                    <connections>
+                                                        <action selector="cancelSetDate:" destination="8Bu-Y8-yWB" id="8Vy-SM-OKf"/>
+                                                    </connections>
+                                                </barButtonItem>
+                                                <barButtonItem key="rightBarButtonItem" title="Done" id="fml-SG-Ke9">
+                                                    <connections>
+                                                        <action selector="doneSetDate:" destination="8Bu-Y8-yWB" id="89l-t2-d7v"/>
+                                                    </connections>
+                                                </barButtonItem>
+                                            </navigationItem>
+                                        </items>
+                                    </navigationBar>
+                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="kEs-hS-LKM">
+                                        <rect key="frame" x="0.0" y="44" width="375" height="216"/>
+                                        <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <date key="date" timeIntervalSinceReferenceDate="533889858.11422801">
+                                            <!--2017-12-02 06:44:18 +0000-->
+                                        </date>
+                                    </datePicker>
+                                </subviews>
+                                <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="iFP-gO-OcT" userLabel="Top Stack">
+                                <rect key="frame" x="0.0" y="20" width="375" height="333"/>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="245" text="Enter your todo here..." translatesAutoresizingMaskIntoConstraints="NO" id="KSP-jM-nPZ">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="250"/>
                                         <color key="backgroundColor" red="0.56862745098039214" green="0.74509803921568629" blue="0.90588235294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -379,45 +420,60 @@
                                             <outlet property="delegate" destination="8Bu-Y8-yWB" id="Pej-7H-xvG"/>
                                         </connections>
                                     </textView>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="apX-1v-dlw">
-                                        <rect key="frame" x="0.0" y="260" width="375" height="40"/>
-                                        <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="SHy-lj-OdE"/>
-                                        </constraints>
-                                        <state key="normal" title="Set a due date">
-                                            <color key="titleColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="setDueDate:" destination="8Bu-Y8-yWB" eventType="touchUpInside" id="V1K-Dh-W5j"/>
-                                        </connections>
-                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="82e-68-jiO">
+                                        <rect key="frame" x="0.0" y="250" width="375" height="83"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="40" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="apX-1v-dlw" userLabel="Set Due Date">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+                                                <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="SHy-lj-OdE"/>
+                                                    <constraint firstAttribute="width" constant="375" id="dqj-m0-wf0"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
+                                                <state key="normal" title="Set a due date">
+                                                    <color key="titleColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="setDueDate:" destination="8Bu-Y8-yWB" eventType="touchUpInside" id="V1K-Dh-W5j"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="40" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FAk-2B-J5L" userLabel="Set Reminder Date">
+                                                <rect key="frame" x="0.0" y="43" width="375" height="40"/>
+                                                <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
+                                                <state key="normal" title="Set a reminder date">
+                                                    <color key="titleColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="setDueDate:" destination="8Bu-Y8-yWB" eventType="touchUpInside" id="a3V-YN-m5w"/>
+                                                    <action selector="setReminderDate:" destination="8Bu-Y8-yWB" eventType="touchUpInside" id="trf-J0-Bdz"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="KSP-jM-nPZ" firstAttribute="top" secondItem="iFP-gO-OcT" secondAttribute="top" id="OOy-8R-9uf"/>
-                                    <constraint firstItem="apX-1v-dlw" firstAttribute="top" secondItem="KSP-jM-nPZ" secondAttribute="bottom" id="btp-0t-U3T"/>
                                     <constraint firstItem="KSP-jM-nPZ" firstAttribute="leading" secondItem="iFP-gO-OcT" secondAttribute="leading" id="h06-bp-IaL"/>
-                                    <constraint firstItem="apX-1v-dlw" firstAttribute="leading" secondItem="iFP-gO-OcT" secondAttribute="leading" id="hbR-fV-MDf"/>
                                     <constraint firstAttribute="trailing" secondItem="KSP-jM-nPZ" secondAttribute="trailing" id="qbE-55-8io"/>
-                                    <constraint firstAttribute="trailing" secondItem="apX-1v-dlw" secondAttribute="trailing" id="xsu-xW-NLN"/>
                                 </constraints>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Eea-Uu-Dnq">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Eea-Uu-Dnq" userLabel="Bottom Buttons">
                                 <rect key="frame" x="16" y="595" width="343" height="72"/>
                                 <subviews>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="K5g-Sa-SRu">
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="K5g-Sa-SRu">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="29"/>
                                         <segments>
                                             <segment title="!"/>
                                             <segment title="!!"/>
                                             <segment title="!!!"/>
                                         </segments>
-                                        <color key="tintColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="tintColor" red="0.66422420739999999" green="0.66424006219999998" blue="0.66423153879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </segmentedControl>
-                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="WLu-2k-BdT">
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="WLu-2k-BdT">
                                         <rect key="frame" x="0.0" y="36" width="343" height="36"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Py2-ci-lUX">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Py2-ci-lUX">
                                                 <rect key="frame" x="0.0" y="0.0" width="343" height="36"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -456,36 +512,18 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Kbm-b1-04P">
-                                <rect key="frame" x="0.0" y="407" width="375" height="260"/>
-                                <subviews>
-                                    <navigationBar contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HdH-5e-4er">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                        <items>
-                                            <navigationItem title="Set a due date" id="KN5-vb-Xh5"/>
-                                        </items>
-                                    </navigationBar>
-                                    <datePicker contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="kEs-hS-LKM">
-                                        <rect key="frame" x="0.0" y="44" width="375" height="216"/>
-                                        <date key="date" timeIntervalSinceReferenceDate="533889858.11422801">
-                                            <!--2017-12-02 06:44:18 +0000-->
-                                        </date>
-                                    </datePicker>
-                                </subviews>
-                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.85098039215686272" green="0.90980392156862744" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Kbm-b1-04P" firstAttribute="leading" secondItem="HRB-ll-ian" secondAttribute="leading" id="0PW-WX-Xzw"/>
-                            <constraint firstAttribute="bottom" secondItem="Kbm-b1-04P" secondAttribute="bottom" id="0fh-AH-RNp"/>
+                            <constraint firstAttribute="bottom" secondItem="Kbm-b1-04P" secondAttribute="bottom" id="1nF-dr-gQG"/>
                             <constraint firstItem="HRB-ll-ian" firstAttribute="trailing" secondItem="iFP-gO-OcT" secondAttribute="trailing" id="EP5-qO-Xwz"/>
                             <constraint firstItem="HRB-ll-ian" firstAttribute="trailing" secondItem="Eea-Uu-Dnq" secondAttribute="trailing" constant="16" id="ODo-wQ-522"/>
+                            <constraint firstItem="Kbm-b1-04P" firstAttribute="trailing" secondItem="HRB-ll-ian" secondAttribute="trailing" id="Tak-Oe-sHf"/>
                             <constraint firstAttribute="bottom" secondItem="Eea-Uu-Dnq" secondAttribute="bottom" id="Ueq-t9-Sed"/>
                             <constraint firstItem="Eea-Uu-Dnq" firstAttribute="leading" secondItem="HRB-ll-ian" secondAttribute="leading" constant="16" id="Wh2-hh-TBT"/>
                             <constraint firstItem="iFP-gO-OcT" firstAttribute="leading" secondItem="HRB-ll-ian" secondAttribute="leading" id="Y6X-20-f0d"/>
                             <constraint firstItem="iFP-gO-OcT" firstAttribute="top" secondItem="HRB-ll-ian" secondAttribute="top" id="Zzt-M6-60z"/>
-                            <constraint firstItem="HRB-ll-ian" firstAttribute="trailing" secondItem="Kbm-b1-04P" secondAttribute="trailing" id="q7E-xI-L8Z"/>
-                            <constraint firstItem="iFP-gO-OcT" firstAttribute="height" secondItem="40M-Ea-Mlp" secondAttribute="height" multiplier="0.45" id="uXR-8S-TT2"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="HRB-ll-ian"/>
                         <userDefinedRuntimeAttributes>
@@ -495,9 +533,14 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                     <connections>
+                        <outlet property="bottomButtons" destination="Eea-Uu-Dnq" id="r4k-BD-Wi6"/>
                         <outlet property="bottomConstraint" destination="Ueq-t9-Sed" id="Jaa-De-L6n"/>
+                        <outlet property="datePicker" destination="kEs-hS-LKM" id="JYr-Xg-Wbo"/>
+                        <outlet property="dateSelector" destination="Kbm-b1-04P" id="6Xw-St-Uaf"/>
                         <outlet property="doneButton" destination="jVz-WC-MMv" id="uJH-eF-W4W"/>
                         <outlet property="segmentedControl" destination="K5g-Sa-SRu" id="hIO-XM-fX6"/>
+                        <outlet property="setDueButton" destination="apX-1v-dlw" id="yB7-Wm-8tj"/>
+                        <outlet property="setReminderButton" destination="FAk-2B-J5L" id="jAd-Fk-1dS"/>
                         <outlet property="textView" destination="KSP-jM-nPZ" id="5IV-2z-XDn"/>
                     </connections>
                 </viewController>
