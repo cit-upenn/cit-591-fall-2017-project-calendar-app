@@ -37,8 +37,11 @@ class UpdateJournalViewController: UIViewController, UITextViewDelegate {
     }
     
     func setupNavBar() {
+        self.navigationController?.navigationBar.isHidden = false
         self.navigationItem.rightBarButtonItem = saveButton
         self.navigationController?.navigationBar.tintColor = UIColor.white
+        self.navigationController?.navigationBar.barTintColor = UIColor(red: 145/255, green: 190/255, blue: 231/255, alpha: 1.0)
+        self.navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.largeTitleDisplayMode = .always
         navigationItem.title = "Journal"
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 30),NSAttributedStringKey.foregroundColor: UIColor.white]

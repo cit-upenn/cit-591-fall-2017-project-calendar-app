@@ -25,7 +25,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="8TO-O3-WgI">
-                                <rect key="frame" x="0.0" y="20" width="375" height="375"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="375"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="kTW-MN-KUX">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
@@ -176,16 +176,35 @@
                                 <color key="backgroundColor" red="0.41969082889999998" green="0.29497302910000001" blue="0.55195826839999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="F6E-7h-712">
-                                <rect key="frame" x="0.0" y="395" width="375" height="223"/>
+                                <rect key="frame" x="0.0" y="439" width="375" height="179"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="tableCell" id="o83-Kc-soV">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="tableCell" textLabel="Iea-yx-Qqf" detailTextLabel="wUt-34-YlZ" style="IBUITableViewCellStyleValue1" id="o83-Kc-soV">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="o83-Kc-soV" id="BZm-MU-SqP">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Iea-yx-Qqf">
+                                                    <rect key="frame" x="15" y="12" width="33.5" height="20.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wUt-34-YlZ">
+                                                    <rect key="frame" x="316" y="12" width="44" height="20.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="ty2-pT-3u0" kind="show" identifier="updateJournalFromCalendar" trigger="accessoryAction" id="5xa-sh-FFJ"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -203,6 +222,9 @@
                         <viewLayoutGuide key="safeArea" id="mHf-aa-yMK"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Calendar" id="bug-sa-nCV"/>
+                    <navigationItem key="navigationItem" id="HQH-yT-gpc">
+                        <barButtonItem key="backBarButtonItem" title=" " id="az3-si-siZ"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="calendarView" destination="3HZ-Ql-Tvi" id="iBj-ET-IGX"/>
                         <outlet property="month" destination="ON7-sy-SqR" id="4yv-Rg-y1Q"/>
@@ -212,7 +234,30 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="120.8" y="-463.71814092953525"/>
+            <point key="canvasLocation" x="924" y="-806"/>
+        </scene>
+        <!--Calendar-->
+        <scene sceneID="iYD-qT-40U">
+            <objects>
+                <navigationController id="xXp-IG-SOu" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Calendar" id="eK9-zr-0h9"/>
+                    <navigationBar key="navigationBar" hidden="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="khx-dC-MvH">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="aNP-sn-cab"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9pk-1b-FQt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="121" y="-805"/>
         </scene>
         <!--Journal-->
         <scene sceneID="Rzo-GX-IGM">
@@ -236,7 +281,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IGZ-Rk-biI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="121" y="893"/>
+            <point key="canvasLocation" x="121" y="1234"/>
         </scene>
         <!--Todo-->
         <scene sceneID="hdM-Be-uIt">
@@ -264,7 +309,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="fTz-V1-HVa"/>
+                        <segue destination="xXp-IG-SOu" kind="relationship" relationship="viewControllers" id="liv-T1-sNu"/>
                         <segue destination="ojL-OG-R7K" kind="relationship" relationship="viewControllers" id="Uye-cK-H3H"/>
                         <segue destination="gOP-1c-rfa" kind="relationship" relationship="viewControllers" id="LuB-s2-M1k"/>
                     </connections>
@@ -314,24 +359,24 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sK7-dW-dpF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1775" y="681"/>
+            <point key="canvasLocation" x="1982" y="1066"/>
         </scene>
         <!--Update Journal View Controller-->
         <scene sceneID="fJe-PI-UwJ">
             <objects>
                 <viewController id="ty2-pT-3u0" customClass="UpdateJournalViewController" customModule="CalendarApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RDk-CT-RXZ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="1Kt-QY-NNl">
-                                <rect key="frame" x="16" y="30" width="343" height="480"/>
+                                <rect key="frame" x="16" y="94" width="343" height="480"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SFB-nC-rtm">
-                                <rect key="frame" x="30" y="5" width="315" height="30"/>
+                                <rect key="frame" x="30" y="69" width="315" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="wbz-Q2-Ewd"/>
                                 </constraints>
@@ -369,7 +414,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yuN-mK-eLu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1773.5999999999999" y="1429.8350824587708"/>
+            <point key="canvasLocation" x="1983" y="1822"/>
         </scene>
         <!--Journal-->
         <scene sceneID="0jM-wt-0En">
@@ -430,7 +475,10 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X42-ro-RUP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="895" y="893"/>
+            <point key="canvasLocation" x="970" y="1234"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="5xa-sh-FFJ"/>
+    </inferredMetricsTieBreakers>
 </document>

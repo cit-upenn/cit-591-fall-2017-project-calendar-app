@@ -37,19 +37,26 @@ class EntriesTableViewController: UITableViewController, UISearchBarDelegate {
         navigationItem.searchController = searchController
 
         searchController.searchBar.placeholder = "Search"
-        searchController.searchBar.showsCancelButton = false
+        searchController.searchBar.showsCancelButton = true
         searchController.searchBar.delegate = self
         searchController.searchBar.backgroundColor = UIColor(red: 145/255, green: 190/255, blue: 231/255, alpha: 1.0)
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
 
-        if (searchText.isEmpty) {
+        if (searchText.isEmpty || (searchBar.text?.isEmpty)!) {
             filterEntries = entries
         } else {
             filterEntries = entries.filter {($0.bodyText?.lowercased().contains(searchText.lowercased()))! }
         }
         self.tableView.reloadData()
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        if (searchBar.text?.isEmpty)! {
+            self.filterEntries = self.entries
+            self.tableView.reloadData()
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
