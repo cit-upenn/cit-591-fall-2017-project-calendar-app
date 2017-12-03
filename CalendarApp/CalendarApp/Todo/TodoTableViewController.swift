@@ -54,20 +54,9 @@ class TodoTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TodoCell", for: indexPath)
-        
         let todo = resultsController.object(at: indexPath)
+    
         cell.textLabel?.text = todo.title
-        if (todo.dueDate == nil) {
-            cell.detailTextLabel?.text = ""
-        } else {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-            cell.detailTextLabel?.text = dateFormatter.string(from: todo.dueDate!)
-            //set due date color to red if past due
-            if (todo.dueDate?.compare(Date()).rawValue == -1){
-                cell.detailTextLabel?.textColor = .red
-            }
-        }
         if todo.complete{
             cell.textLabel?.textColor = UIColor.lightGray
             cell.detailTextLabel?.textColor = UIColor.lightGray
@@ -75,11 +64,31 @@ class TodoTableViewController: UITableViewController {
             cell.textLabel?.textColor = .black
             cell.detailTextLabel?.textColor = .black
         }
+        
+        if (todo.dueDate == nil) {
+            cell.detailTextLabel?.text = ""
+        } else {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+            let due = dateFormatter.string(from: todo.dueDate!)
+            cell.detailTextLabel?.text = "Due date: \(due)"
+            //set due date color to red if past due
+            if (todo.dueDate?.compare(Date()).rawValue == -1 && !todo.complete){
+                cell.detailTextLabel?.textColor = .red
+            }
+        }
+        
         if (todo.reminderDate != nil) {
             let image = #imageLiteral(resourceName: "bell-512")
             let imageView = UIImageView(image: image)
             imageView.frame = CGRect(x: 340, y: 15, width: 30, height: 30)
             cell.contentView.addSubview(imageView)
+        } else {
+            for view in cell.contentView.subviews {
+                if let view = view as? UIImageView {
+                    view.removeFromSuperview()
+                }
+            }
         }
         return cell
     }

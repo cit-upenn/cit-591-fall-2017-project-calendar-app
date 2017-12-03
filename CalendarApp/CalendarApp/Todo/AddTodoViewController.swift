@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import UserNotifications
 
 class AddTodoViewController: UIViewController {
 
@@ -30,6 +31,8 @@ class AddTodoViewController: UIViewController {
     var didUpdateDueDate = false
     var didUpdateReminderDate = false
     var typeDatePicked = "due"
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -122,6 +125,23 @@ class AddTodoViewController: UIViewController {
         } catch {
             print("Error saving todo: \(error)" )
         }
+        if self.todo?.reminderDate != nil {
+            let content = UNMutableNotificationContent()
+            content.title = "Don't forget"
+            content.body = (self.todo?.title)!
+            content.sound = UNNotificationSound.default()
+            
+            let date = self.todo?.reminderDate
+            var triggerDate = Calendar.current.dateComponents([.year,.month,.day,.hour,.minute,.second,], from: date!)
+            triggerDate.second = 0
+            let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate,
+                                                        repeats: false)
+            let identifier = "UYLLocalNotification"
+            let request = UNNotificationRequest(identifier: identifier,
+                                                content: content, trigger: trigger)
+            UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+        }
+        
         
     }
     
