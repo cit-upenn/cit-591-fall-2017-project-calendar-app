@@ -106,6 +106,13 @@ class CalendarViewController: UIViewController {
                 } else {
                     return false
                 }
+            } else if let journal = element as? Entry {
+                let elementdateString = formatter.string(from: journal.createdAt!)
+                if elementdateString == cellDateString {
+                    return true
+                } else {
+                    return false
+                }
             }
             return false
         }
@@ -214,16 +221,6 @@ extension CalendarViewController{
             print("Fetch data Failed \(error)")
         }
         return entries
-//        formatter.dateFormat = "yyyy MM dd"
-//        return [
-//            "2017 03 12": "Happy Birthday!",
-//            formatter.date(from: "2017 01 26")!: "Last day to drop class!",
-//            formatter.date(from: "2017 03 18")!: "Spring break!",
-//            formatter.date(from: "2017 07 23")!: "pay off credit card!",
-//            formatter.date(from: "2017 08 10")!: "new movie!!",
-//            "2017 11 01": "math midterm!",
-//            formatter.date(from: "2017 12 24")!: "Merry Christmas!",
-//       ]
     }
 }
 

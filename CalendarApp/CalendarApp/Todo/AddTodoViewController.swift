@@ -13,6 +13,8 @@ import UserNotifications
 class AddTodoViewController: UIViewController {
 
     //MARK: - Outlets
+    
+    
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
@@ -82,9 +84,11 @@ class AddTodoViewController: UIViewController {
         textView.resignFirstResponder()
     }
     
+    
     @IBAction func cancel(_ sender: UIButton) {
         dismissAndResign()
     }
+    
     
     @IBAction func done(_ sender: UIButton) {
         guard let title = textView.text, !title.isEmpty else {return}
@@ -108,16 +112,16 @@ class AddTodoViewController: UIViewController {
         do {
             try managedContext.save()
             
-//            let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Todo")
-//            request.returnsObjectsAsFaults = false
-//            do {
-//                let result = try managedContext.fetch(request)
-//                for data in result as! [NSManagedObject] {
-//                    print(data)
-//                }
-//            } catch {
-//                print("Failed")
-//            }
+            //            let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Todo")
+            //            request.returnsObjectsAsFaults = false
+            //            do {
+            //                let result = try managedContext.fetch(request)
+            //                for data in result as! [NSManagedObject] {
+            //                    print(data)
+            //                }
+            //            } catch {
+            //                print("Failed")
+            //            }
             dismissAndResign()
         } catch {
             print("Error saving todo: \(error)" )
@@ -143,6 +147,8 @@ class AddTodoViewController: UIViewController {
         
         
     }
+   
+    
     
     @IBAction func setDueDate(_ sender:UIButton) {
         textView.resignFirstResponder()
