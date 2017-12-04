@@ -45,6 +45,33 @@ class TodoTableViewController: UITableViewController {
         }
     
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // Request
+        let request: NSFetchRequest<Todo> = Todo.fetchRequest()
+        let sortDescriptor1 = NSSortDescriptor(key: "dueDate", ascending: true)
+        let sortDescriptor2 = NSSortDescriptor(key: "title", ascending: true)
+        
+        // Init
+        request.sortDescriptors = [sortDescriptor1, sortDescriptor2]
+        request.predicate = NSPredicate(format: "complete == false")
+        resultsController = NSFetchedResultsController(
+            fetchRequest: request,
+            managedObjectContext: managedContext,
+            sectionNameKeyPath: nil,
+            cacheName: nil
+        )
+        resultsController.delegate = self
+        
+        // Fetch
+        do {
+            try resultsController.performFetch()
+        } catch {
+            print("Perform fetch error: \(error)")
+        }
+        
+    }
 
     // MARK: - Table view data source
 
@@ -55,7 +82,8 @@ class TodoTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TodoCell", for: indexPath)
         let todo = resultsController.object(at: indexPath)
-    
+        
+        //set title and title color
         cell.textLabel?.text = todo.title
         if todo.complete{
             cell.textLabel?.textColor = UIColor.lightGray
@@ -65,6 +93,7 @@ class TodoTableViewController: UITableViewController {
             cell.detailTextLabel?.textColor = .black
         }
         
+        //set subtitle
         if (todo.dueDate == nil) {
             cell.detailTextLabel?.text = ""
         } else {
@@ -77,18 +106,26 @@ class TodoTableViewController: UITableViewController {
                 cell.detailTextLabel?.textColor = .red
             }
         }
+       
         
-        if todo.reminderDate != nil {
-            if !todo.complete {
-                let image = #imageLiteral(resourceName: "bell-512")
-                let imageView = UIImageView(image: image)
-                var yOffset = 20
-                if (cell.detailTextLabel?.text == "") {
-                    yOffset = 12
+        //setting up remind bell for each todo item
+        let image = #imageLiteral(resourceName: "bell-512")
+        let imageView = UIImageView(image: image)
+        
+        if todo.dueDate != nil && todo.reminderDate != nil {
+            // remove bell if there exists one
+            for view in cell.contentView.subviews {
+                if let view = view as? UIImageView {
+                    view.removeFromSuperview()
                 }
-                imageView.frame = CGRect(x: 350, y: yOffset, width: 20, height: 20)
-                cell.contentView.addSubview(imageView)
             }
+            let yOffset = 20
+            imageView.frame = CGRect(x: 350, y: yOffset, width: 20, height: 20)
+            cell.contentView.addSubview(imageView)
+        } else if todo.dueDate == nil && todo.reminderDate != nil {
+            let yOffset = 12
+            imageView.frame = CGRect(x: 350, y: yOffset, width: 20, height: 20)
+            cell.contentView.addSubview(imageView)
         } else {
             for view in cell.contentView.subviews {
                 if let view = view as? UIImageView {
@@ -119,6 +156,10 @@ class TodoTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        //checked item won't have this action
+        let todo = self.resultsController.object(at: indexPath)
+        if todo.complete {return nil}
+        //configuration for unfinished items
         let action = UIContextualAction(style: .normal, title: "Check") { ( action, view, completion) in
             let todo = self.resultsController.object(at: indexPath)
             todo.complete = true

@@ -74,7 +74,7 @@ class CalendarViewController: UIViewController {
         let contains = eventsFromCoreData.contains { (element) -> Bool in
             if let todo = element as? Todo {
                 if todo.dueDate == nil {return false}
-                var elementdateString = formatter.string(from: todo.dueDate!)
+                let elementdateString = formatter.string(from: todo.dueDate!)
                 if elementdateString == cellDateString {
                     return true
                 } else {
