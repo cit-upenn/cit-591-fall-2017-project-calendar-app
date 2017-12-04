@@ -11,10 +11,15 @@ import JTAppleCalendar
 import CoreData
 
 class CalendarViewController: UIViewController {
+    
+    //MARK: - Outlets
     @IBOutlet weak var calendarView: JTAppleCalendarView!
     @IBOutlet weak var year: UILabel!
     @IBOutlet weak var month: UILabel!
     @IBOutlet weak var tableView: UITableView!
+
+    @IBOutlet weak var calendarTableView: UITableView!
+
     
     //MARK: - Properties
     let monthColor = UIColor.darkGray
@@ -30,25 +35,33 @@ class CalendarViewController: UIViewController {
     var todayJournal: [Entry] = []
 //    var todayToDo: [ToDo] = []
     
-    // TODO: change to fetch event from coredata
-    var eventsFromServer: [String:String] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.delegate = self
         self.tableView.dataSource = self
         setupCalendarView()
+
         self.navigationController?.navigationBar.isHidden = true
         calendarView.scrollToDate(todaysDate)
+
+        calendarView.scrollToDate(todaysDate, animateScroll: false)
+        //calendarView.scrollToDate(todaysDate)
+
         calendarView.selectDates([todaysDate])
+        
     }
     
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.fetchData()
         self.navigationController?.navigationBar.isHidden = true
     }
     
+
+    //MARK: - Actions
+
     func setupCalendarView(){
         //setup calendar spacing
         calendarView.minimumLineSpacing = 0
@@ -63,8 +76,6 @@ class CalendarViewController: UIViewController {
     
     func handleCellTextColor(cell: JTAppleCell?, cellState: CellState) {
         guard let cell = cell as? CalendarCell else {return}
-        
-        formatter.dateFormat = "yyyy MM dd"
         if cellState.isSelected {
             cell.dateLabel.textColor = selectedMonthColor
         } else {
@@ -81,10 +92,25 @@ class CalendarViewController: UIViewController {
         }
     }
     
-//    func handleCellEvent(view: JTAppleCell?, cellState: CellState) {
-//        guard let cell = view as? CalendarCell else {return}
-//        cell.eventDotView.isHidden = !eventsFromServer.keys.contains(formatter.string(from: cellState.date))
-//    }
+    func handleCellEvent(cell: JTAppleCell?, cellState: CellState) {
+        guard let cell = cell as? CalendarCell else {return}
+        formatter.dateFormat = "yyyy MM dd"
+        let cellDateString = formatter.string(from: cellState.date)
+        let eventsFromCoreData = getCoreDataEvents()
+        let contains = eventsFromCoreData.contains { (element) -> Bool in
+            if let todo = element as? Todo {
+                if todo.dueDate == nil {return false}
+                let elementdateString = formatter.string(from: todo.dueDate!)
+                if elementdateString == cellDateString {
+                    return true
+                } else {
+                    return false
+                }
+            }
+            return false
+        }
+        cell.eventDot.isHidden = !contains
+    }
     
     func setupViewsOfCalendar(from visibleDates: DateSegmentInfo){
         let date = visibleDates.monthDates.first!.date
@@ -104,13 +130,14 @@ class CalendarViewController: UIViewController {
     
 }
 
+//MARK: - calendar view data source
 extension CalendarViewController: JTAppleCalendarViewDataSource{
     func calendar(_ calendar: JTAppleCalendarView, willDisplay cell: JTAppleCell, forItemAt date: Date, cellState: CellState, indexPath: IndexPath) {
         let cell = calendar.dequeueReusableJTAppleCell(withReuseIdentifier: "CalendarCell", for: indexPath) as! CalendarCell
         cell.dateLabel.text = cellState.text
         handleCellTextColor(cell: cell, cellState: cellState)
         handleCellSelected(cell: cell, cellState: cellState)
-        //handleCellEvent(view: cell, cellState: cellState)
+        handleCellEvent(cell: cell, cellState: cellState)
     }
     
     func configureCalendar(_ calendar: JTAppleCalendarView) -> ConfigurationParameters {
@@ -118,8 +145,8 @@ extension CalendarViewController: JTAppleCalendarViewDataSource{
         formatter.timeZone = Calendar.current.timeZone
         formatter.locale = Calendar.current.locale
         
-        let startDate = formatter.date(from: "1900 01 01")!
-        let endDate = formatter.date(from: "2500 12 31")!
+        let startDate = formatter.date(from: "1999 01 01")!
+        let endDate = formatter.date(from: "2200 12 31")!
         
         
         let parameters = ConfigurationParameters(startDate: startDate, endDate: endDate, numberOfRows: 6, generateInDates: .forAllMonths, generateOutDates: .off, firstDayOfWeek: .sunday, hasStrictBoundaries: true)
@@ -127,6 +154,8 @@ extension CalendarViewController: JTAppleCalendarViewDataSource{
     }
 }
 
+
+// MARK: - calendar view delegate
 extension CalendarViewController: JTAppleCalendarViewDelegate {
     
     //display the cell
@@ -140,7 +169,7 @@ extension CalendarViewController: JTAppleCalendarViewDelegate {
         }
         handleCellTextColor(cell: cell, cellState: cellState)
         handleCellSelected(cell: cell, cellState: cellState)
-        //handleCellEvent(view: cell, cellState: cellState)
+        handleCellEvent(cell: cell, cellState: cellState)
         return cell
     }
     
@@ -148,16 +177,19 @@ extension CalendarViewController: JTAppleCalendarViewDelegate {
         guard (cell as? CalendarCell) != nil else {return}
         handleCellTextColor(cell: cell, cellState: cellState)
         handleCellSelected(cell: cell, cellState: cellState)
+
         //handleCellEvent(view: cell, cellState: cellState)
         selectedDate = date
         self.fetchData()
+        handleCellEvent(cell: cell, cellState: cellState)
+
     }
     
     func calendar(_ calendar: JTAppleCalendarView, didDeselectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
         guard (cell as? CalendarCell) != nil else {return}
         handleCellTextColor(cell: cell, cellState: cellState)
         handleCellSelected(cell: cell, cellState: cellState)
-        //handleCellEvent(view: cell, cellState: cellState)
+        handleCellEvent(cell: cell, cellState: cellState)
     }
     
     func calendar(_ calendar: JTAppleCalendarView, didScrollToDateSegmentWith visibleDates: DateSegmentInfo) {
@@ -165,21 +197,37 @@ extension CalendarViewController: JTAppleCalendarViewDelegate {
     }
 }
 
+//MARK: - fetch data
 extension CalendarViewController{
-    func getServerEvents() -> [Date:String] {
-        formatter.dateFormat = "yyyy MM dd"
-        return [
-            formatter.date(from: "2017 03 12")!: "Happy Birthday!",
-            formatter.date(from: "2017 01 26")!: "Last day to drop class!",
-            formatter.date(from: "2017 03 18")!: "Spring break!",
-            formatter.date(from: "2017 07 23")!: "pay off credit card!",
-            formatter.date(from: "2017 08 10")!: "new movie!!",
-            formatter.date(from: "2017 11 01")!: "math midterm!",
-            formatter.date(from: "2017 12 24")!: "Merry Christmas!",
-        ]
+    func getCoreDataEvents() -> [AnyObject] {
+        var entries = [AnyObject]()
+        
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Todo")
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        request.returnsObjectsAsFaults = false
+        do {
+            let result = try context.fetch(request)
+            for data in result as! [NSManagedObject] {
+                entries.append(data)
+            }
+        } catch {
+            print("Fetch data Failed \(error)")
+        }
+        return entries
+//        formatter.dateFormat = "yyyy MM dd"
+//        return [
+//            "2017 03 12": "Happy Birthday!",
+//            formatter.date(from: "2017 01 26")!: "Last day to drop class!",
+//            formatter.date(from: "2017 03 18")!: "Spring break!",
+//            formatter.date(from: "2017 07 23")!: "pay off credit card!",
+//            formatter.date(from: "2017 08 10")!: "new movie!!",
+//            "2017 11 01": "math midterm!",
+//            formatter.date(from: "2017 12 24")!: "Merry Christmas!",
+//       ]
     }
 }
 
+// MARK: - UIColor
 extension UIColor {
     convenience init(colorWithHexValue value: Int, alpha:CGFloat = 1.0) {
         self.init (
