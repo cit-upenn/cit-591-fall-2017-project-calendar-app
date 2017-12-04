@@ -21,8 +21,10 @@ class CalendarViewController: UIViewController {
     let selectedMonthColor = UIColor.black
     let formatter = DateFormatter()
     let todaysDate = Date()
+    var selectedDate = Date()
+    var selectedRow: Int!
     
-    //Core Data
+    //MARK: - Core Data
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var entries: [Entry] = []
     var todayJournal: [Entry] = []
@@ -33,10 +35,18 @@ class CalendarViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
         setupCalendarView()
+        self.navigationController?.navigationBar.isHidden = true
         calendarView.scrollToDate(todaysDate)
         calendarView.selectDates([todaysDate])
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.fetchData()
+        self.navigationController?.navigationBar.isHidden = true
     }
     
     func setupCalendarView(){
@@ -139,6 +149,8 @@ extension CalendarViewController: JTAppleCalendarViewDelegate {
         handleCellTextColor(cell: cell, cellState: cellState)
         handleCellSelected(cell: cell, cellState: cellState)
         //handleCellEvent(view: cell, cellState: cellState)
+        selectedDate = date
+        self.fetchData()
     }
     
     func calendar(_ calendar: JTAppleCalendarView, didDeselectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
@@ -182,33 +194,77 @@ extension UIColor {
 extension CalendarViewController: UITableViewDataSource, UITableViewDelegate{
     
     // MARK: - Table view data source
+    //TODO: add todo data
+    func fetchData() {
+        //setup predicate
+        var calendar = Calendar.current
+        calendar.timeZone = NSTimeZone.local
+        let dateFrom = calendar.startOfDay(for: selectedDate)
+        var components = calendar.dateComponents([.year, .month, .day, .hour, .minute],from: dateFrom)
+        components.day! += 1
+        let dateTo = calendar.date(from: components)!
+        let datePredicate = NSPredicate(format: "(%@ <= createdAt) AND (createdAt < %@)", argumentArray: [dateFrom, dateTo])
+        
+        //fetch data using predicate
+        do {
+            let fetchRequest: NSFetchRequest<Entry> = Entry.fetchRequest()
+            fetchRequest.predicate = datePredicate
+            todayJournal = try context.fetch(fetchRequest)
+        } catch let error as NSError {
+            print("Could not fetch entries: \(error), \(error.userInfo)")
+        }
+        
+        self.tableView.reloadData()
+    }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    //only journal now, need to add todo data
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return entries.count
+        return todayJournal.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "tableCell", for: indexPath)
         
-        cell.textLabel?.text = entries.reversed()[indexPath.row].bodyText
-        
-        if let date = entries.reversed()[indexPath.row].createdAt {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateStyle = .medium
-            dateFormatter.timeStyle = .short
-            cell.detailTextLabel?.text = dateFormatter.string(from: date)
-        } else {
-            cell.detailTextLabel?.text = ""
-        }
+        cell.textLabel?.text = todayJournal.reversed()[indexPath.row].bodyText
+        cell.detailTextLabel?.text = "Journal"
         
         return cell
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        // Return false if you do not want the specified item to be editable.
+        return true
+    }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        selectedRow = indexPath.row
+        performSegue(withIdentifier: "updateJournalFromCalendar", sender: self)
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let delete = UITableViewRowAction(style: .default, title: "Delete") { (action, indexPath) in
+            
+            let entry = self.todayJournal.reversed()[indexPath.row]
+            self.context.delete(entry)
+            (UIApplication.shared.delegate as! AppDelegate).saveContext()
+            
+            self.fetchData()
+        }
+        delete.backgroundColor = UIColor(red: 36/255, green: 39/255, blue: 148/255, alpha: 1.0)
+        return [delete]
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "updateJournalFromCalendar" {
+            let update = segue.destination as! UpdateJournalViewController
+            update.entry = todayJournal.reversed()[selectedRow!]
+        }
+    }
 }
 

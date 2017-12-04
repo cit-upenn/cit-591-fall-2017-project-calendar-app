@@ -16,7 +16,8 @@ class UpdateJournalViewController: UIViewController, UITextViewDelegate {
 
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var textView: UITextView!
-    @IBOutlet weak var dateField: UITextField!
+    @IBOutlet weak var dateLabel: UILabel!
+    
     
     @IBAction func saveClick(_ sender: Any) {
         guard let updateText = textView.text else {
@@ -37,8 +38,11 @@ class UpdateJournalViewController: UIViewController, UITextViewDelegate {
     }
     
     func setupNavBar() {
+        self.navigationController?.navigationBar.isHidden = false
         self.navigationItem.rightBarButtonItem = saveButton
         self.navigationController?.navigationBar.tintColor = UIColor.white
+        self.navigationController?.navigationBar.barTintColor = UIColor(red: 145/255, green: 190/255, blue: 231/255, alpha: 1.0)
+        self.navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.largeTitleDisplayMode = .always
         navigationItem.title = "Journal"
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 30),NSAttributedStringKey.foregroundColor: UIColor.white]
@@ -53,10 +57,10 @@ class UpdateJournalViewController: UIViewController, UITextViewDelegate {
             let dateFormatter = DateFormatter()
             dateFormatter.dateStyle = .medium
             dateFormatter.timeStyle = .short
-            dateField.text = dateFormatter.string(from: existedDate)
-            dateField.textColor = UIColor.lightGray
+            dateLabel.text = dateFormatter.string(from: existedDate)
+            dateLabel.textColor = UIColor.lightGray
         } else {
-            dateField.text = ""
+            dateLabel.text = ""
         }  
     }
 }
