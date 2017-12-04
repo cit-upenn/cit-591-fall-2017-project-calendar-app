@@ -78,11 +78,17 @@ class TodoTableViewController: UITableViewController {
             }
         }
         
-        if (todo.reminderDate != nil) {
-            let image = #imageLiteral(resourceName: "bell-512")
-            let imageView = UIImageView(image: image)
-            imageView.frame = CGRect(x: 340, y: 15, width: 30, height: 30)
-            cell.contentView.addSubview(imageView)
+        if todo.reminderDate != nil {
+            if !todo.complete {
+                let image = #imageLiteral(resourceName: "bell-512")
+                let imageView = UIImageView(image: image)
+                var yOffset = 20
+                if (cell.detailTextLabel?.text == "") {
+                    yOffset = 12
+                }
+                imageView.frame = CGRect(x: 350, y: yOffset, width: 20, height: 20)
+                cell.contentView.addSubview(imageView)
+            }
         } else {
             for view in cell.contentView.subviews {
                 if let view = view as? UIImageView {

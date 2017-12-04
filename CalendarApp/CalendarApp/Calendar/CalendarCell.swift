@@ -11,7 +11,8 @@ import JTAppleCalendar
 
 class CalendarCell: JTAppleCell {
     
-    //MARK: - Outlets
+     //MARK: - Outlets
+    @IBOutlet weak var eventDot: UIImageView!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var selectedView: UIView!
 }

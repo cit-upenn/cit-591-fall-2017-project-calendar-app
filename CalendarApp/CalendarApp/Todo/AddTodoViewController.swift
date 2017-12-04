@@ -28,9 +28,9 @@ class AddTodoViewController: UIViewController {
         //= (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var todo: Todo?
     let dateFormatter = DateFormatter()
-    var didUpdateDueDate = false
-    var didUpdateReminderDate = false
-    var typeDatePicked = "due"
+    var dueDateFromPicker:Date? = nil
+    var reminderDateFromPicker:Date? = nil
+    var typeDatePicked = ""
     
     
 
@@ -87,9 +87,7 @@ class AddTodoViewController: UIViewController {
     }
     
     @IBAction func done(_ sender: UIButton) {
-        guard let title = textView.text, !title.isEmpty else {
-            return
-        }
+        guard let title = textView.text, !title.isEmpty else {return}
         if let todo = self.todo {
             todo.title = title
             todo.priority = Int16(segmentedControl.selectedSegmentIndex)
@@ -100,13 +98,12 @@ class AddTodoViewController: UIViewController {
             todo.setupDate = Date()
             self.todo = todo
         }
-        if didUpdateDueDate {
-            self.todo?.dueDate = datePicker.date
+        if (dueDateFromPicker != nil) {
+            self.todo?.dueDate = dueDateFromPicker
         }
-        if didUpdateReminderDate {
-            self.todo?.reminderDate = datePicker.date
+        if (reminderDateFromPicker != nil) {
+            self.todo?.reminderDate = reminderDateFromPicker
         }
-        
         
         do {
             try managedContext.save()
@@ -125,6 +122,8 @@ class AddTodoViewController: UIViewController {
         } catch {
             print("Error saving todo: \(error)" )
         }
+        
+        //set up push notification for reminder
         if self.todo?.reminderDate != nil {
             let content = UNMutableNotificationContent()
             content.title = "Don't forget"
@@ -149,6 +148,7 @@ class AddTodoViewController: UIViewController {
         textView.resignFirstResponder()
         bottomButtons.isHidden = true
         dateSelector.isHidden = false
+        typeDatePicked = "due"
         
         UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded()
@@ -178,10 +178,10 @@ class AddTodoViewController: UIViewController {
         let strDate = dateFormatter.string(from: datePicker.date)
         if typeDatePicked == "due"{
             setDueButton.setTitle("Due Date: \(strDate)", for: UIControlState.normal)
-            didUpdateDueDate = true
+            dueDateFromPicker = datePicker.date
         } else {
             setReminderButton.setTitle("Reminder Date: \(strDate)", for: UIControlState.normal)
-            didUpdateReminderDate = true
+            reminderDateFromPicker = datePicker.date
         }
         dismissDateSelector()
     }

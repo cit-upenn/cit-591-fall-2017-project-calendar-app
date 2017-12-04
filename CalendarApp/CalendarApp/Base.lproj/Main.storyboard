@@ -148,21 +148,32 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qiW-CY-7TG">
-                                                            <rect key="frame" x="8" y="18.5" width="42" height="20.5"/>
+                                                            <rect key="frame" x="8" y="18" width="42" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" verticalHuggingPriority="251" image="dot" translatesAutoresizingMaskIntoConstraints="NO" id="eAs-Gx-9lo">
+                                                            <rect key="frame" x="27" y="40" width="4" height="4"/>
+                                                            <color key="tintColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.80000000000000004" alpha="0.75013377568493145" colorSpace="calibratedRGB"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="4" id="96e-ro-wp4"/>
+                                                                <constraint firstAttribute="height" constant="4" id="pwd-gI-MZr"/>
+                                                            </constraints>
+                                                        </imageView>
                                                     </subviews>
                                                 </view>
                                                 <constraints>
                                                     <constraint firstItem="rZf-kW-mlb" firstAttribute="centerY" secondItem="BTI-mA-mSx" secondAttribute="centerY" id="3Nl-jI-HDf"/>
-                                                    <constraint firstItem="qiW-CY-7TG" firstAttribute="centerY" secondItem="BTI-mA-mSx" secondAttribute="centerY" id="DvK-sP-hO0"/>
-                                                    <constraint firstItem="qiW-CY-7TG" firstAttribute="centerX" secondItem="BTI-mA-mSx" secondAttribute="centerX" id="dfi-XU-MCg"/>
+                                                    <constraint firstItem="qiW-CY-7TG" firstAttribute="centerX" secondItem="BTI-mA-mSx" secondAttribute="centerX" id="9ZK-kP-kwN"/>
+                                                    <constraint firstItem="eAs-Gx-9lo" firstAttribute="top" secondItem="qiW-CY-7TG" secondAttribute="bottom" constant="1" id="MPE-eI-GLt"/>
+                                                    <constraint firstItem="eAs-Gx-9lo" firstAttribute="centerX" secondItem="qiW-CY-7TG" secondAttribute="centerX" id="Q5C-mb-mk6"/>
+                                                    <constraint firstItem="qiW-CY-7TG" firstAttribute="centerY" secondItem="BTI-mA-mSx" secondAttribute="centerY" id="ZHJ-4G-cMu"/>
                                                     <constraint firstItem="rZf-kW-mlb" firstAttribute="centerX" secondItem="BTI-mA-mSx" secondAttribute="centerX" id="zoZ-ZV-YkA"/>
                                                 </constraints>
                                                 <connections>
                                                     <outlet property="dateLabel" destination="qiW-CY-7TG" id="fST-By-s1v"/>
+                                                    <outlet property="eventDot" destination="eAs-Gx-9lo" id="xyC-s2-0oq"/>
                                                     <outlet property="selectedView" destination="rZf-kW-mlb" id="9Qt-sI-jhr"/>
                                                 </connections>
                                             </collectionViewCell>
@@ -549,4 +560,7 @@
             <point key="canvasLocation" x="1685.5999999999999" y="198.35082458770617"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="dot" width="2000" height="2000"/>
+    </resources>
 </document>
