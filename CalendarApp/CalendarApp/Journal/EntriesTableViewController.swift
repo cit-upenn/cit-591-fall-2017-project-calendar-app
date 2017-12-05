@@ -37,7 +37,7 @@ class EntriesTableViewController: UITableViewController, UISearchBarDelegate {
         navigationItem.searchController = searchController
 
         searchController.searchBar.placeholder = "Search"
-        searchController.searchBar.showsCancelButton = true
+        searchController.searchBar.showsCancelButton = false
         searchController.searchBar.delegate = self
         searchController.searchBar.backgroundColor = UIColor(red: 145/255, green: 190/255, blue: 231/255, alpha: 1.0)
     }

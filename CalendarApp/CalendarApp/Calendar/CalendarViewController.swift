@@ -32,8 +32,8 @@ class CalendarViewController: UIViewController {
     //MARK: - Core Data
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var entries: [Entry] = []
-    var todayJournal: [Entry] = []
-//    var todayToDo: [ToDo] = []
+    var todayData: [AnyObject] = []
+//    var todayToDo: [Todo] = []
     
     
     override func viewDidLoad() {
@@ -248,13 +248,19 @@ extension CalendarViewController: UITableViewDataSource, UITableViewDelegate{
         var components = calendar.dateComponents([.year, .month, .day, .hour, .minute],from: dateFrom)
         components.day! += 1
         let dateTo = calendar.date(from: components)!
-        let datePredicate = NSPredicate(format: "(%@ <= createdAt) AND (createdAt < %@)", argumentArray: [dateFrom, dateTo])
-        
+        let entryDatePredicate = NSPredicate(format: "(%@ <= createdAt) AND (createdAt < %@)", argumentArray: [dateFrom, dateTo])
+        let todoDatePredicate = NSPredicate(format: "(%@ <= dueDate) AND (dueDate < %@)", argumentArray: [dateFrom, dateTo])
         //fetch data using predicate
         do {
-            let fetchRequest: NSFetchRequest<Entry> = Entry.fetchRequest()
-            fetchRequest.predicate = datePredicate
-            todayJournal = try context.fetch(fetchRequest)
+            let entryFetchRequest: NSFetchRequest<Entry> = Entry.fetchRequest()
+            let todoFetchRequest: NSFetchRequest<Todo> = Todo.fetchRequest()
+            entryFetchRequest.predicate = entryDatePredicate
+            todoFetchRequest.predicate = todoDatePredicate
+            todayData = try context.fetch(entryFetchRequest)
+            let results = try context.fetch(todoFetchRequest)
+            for result in results {
+                todayData.append(result)
+            }
         } catch let error as NSError {
             print("Could not fetch entries: \(error), \(error.userInfo)")
         }
@@ -267,15 +273,20 @@ extension CalendarViewController: UITableViewDataSource, UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return todayJournal.count
+        return todayData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "tableCell", for: indexPath)
-        
-        cell.textLabel?.text = todayJournal.reversed()[indexPath.row].bodyText
-        cell.detailTextLabel?.text = "Journal"
-        
+        let data = todayData.reversed()[indexPath.row]
+        if let journal = data as? Entry {
+            cell.textLabel?.text = journal.bodyText
+            cell.detailTextLabel?.text = "Journal"
+        } else if let todo = data as? Todo {
+            cell.textLabel?.text = todo.title
+            cell.detailTextLabel?.text = "Todo"
+        }
+
         return cell
     }
     
@@ -287,7 +298,13 @@ extension CalendarViewController: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         selectedRow = indexPath.row
-        performSegue(withIdentifier: "updateJournalFromCalendar", sender: self)
+        let data = todayData.reversed()[selectedRow]
+        if data is Entry {
+            performSegue(withIdentifier: "updateJournalFromCalendar", sender: self)
+        } else if data is Todo {
+            performSegue(withIdentifier: "updateTodoFromCalendar", sender: self)
+        }
+        
         
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -295,8 +312,13 @@ extension CalendarViewController: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let delete = UITableViewRowAction(style: .default, title: "Delete") { (action, indexPath) in
             
-            let entry = self.todayJournal.reversed()[indexPath.row]
-            self.context.delete(entry)
+            let data = self.todayData.reversed()[indexPath.row]
+            if let journal = data as? Entry {
+                self.context.delete(journal)
+            } else if let todo = data as? Todo {
+                self.context.delete(todo)
+            }
+            
             (UIApplication.shared.delegate as! AppDelegate).saveContext()
             
             self.fetchData()
@@ -308,7 +330,17 @@ extension CalendarViewController: UITableViewDataSource, UITableViewDelegate{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "updateJournalFromCalendar" {
             let update = segue.destination as! UpdateJournalViewController
-            update.entry = todayJournal.reversed()[selectedRow!]
+            let data = todayData.reversed()[selectedRow!]
+            if let journal = data as? Entry {
+                update.entry = journal
+            }
+        } else if segue.identifier == "updateTodoFromCalendar" {
+            let update = segue.destination as! AddTodoViewController
+            update.managedContext = self.context
+            let data = todayData.reversed()[selectedRow!]
+            if let todo = data as? Todo {
+                update.todo = todo
+            }
         }
     }
 }

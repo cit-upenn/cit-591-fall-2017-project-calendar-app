@@ -212,9 +212,6 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="ty2-pT-3u0" kind="show" identifier="updateJournalFromCalendar" trigger="accessoryAction" id="5xa-sh-FFJ"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -240,6 +237,8 @@
                         <outlet property="month" destination="ON7-sy-SqR" id="4yv-Rg-y1Q"/>
                         <outlet property="tableView" destination="F6E-7h-712" id="vOG-3t-XFj"/>
                         <outlet property="year" destination="vRN-hL-AvT" id="BJ9-Tf-dgy"/>
+                        <segue destination="ty2-pT-3u0" kind="show" identifier="updateJournalFromCalendar" id="khg-9r-S0L"/>
+                        <segue destination="Pun-f4-N1E" kind="presentation" identifier="updateTodoFromCalendar" id="nzQ-52-oyP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -742,6 +741,7 @@
         <image name="dot" width="2000" height="2000"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="5xa-sh-FFJ"/>
+        <segue reference="nzQ-52-oyP"/>
+        <segue reference="khg-9r-S0L"/>
     </inferredMetricsTieBreakers>
 </document>
