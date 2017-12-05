@@ -284,10 +284,10 @@ extension CalendarViewController: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "tableCell", for: indexPath)
         let data = todayData.reversed()[indexPath.row]
+        cell.textLabel?.textColor = UIColor.black
         if let journal = data as? Entry {
             cell.textLabel?.text = journal.bodyText
             cell.detailTextLabel?.text = "Journal"
-            
         } else if let todo = data as? Todo {
             if todo.complete {
                 cell.textLabel?.text = "Completed: \(todo.title!)"
