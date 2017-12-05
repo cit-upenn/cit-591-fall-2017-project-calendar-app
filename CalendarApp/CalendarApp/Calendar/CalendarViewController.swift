@@ -282,16 +282,21 @@ extension CalendarViewController: UITableViewDataSource, UITableViewDelegate{
         if let journal = data as? Entry {
             cell.textLabel?.text = journal.bodyText
             cell.detailTextLabel?.text = "Journal"
+            
         } else if let todo = data as? Todo {
-            cell.textLabel?.text = todo.title
+            if todo.complete {
+                cell.textLabel?.text = "Completed: \(todo.title!)"
+                cell.textLabel?.textColor = UIColor.gray
+            } else {
+                cell.textLabel?.text = todo.title
+            }
             cell.detailTextLabel?.text = "Todo"
         }
-
+        cell.detailTextLabel?.textColor = UIColor.init(colorWithHexValue: 0x242794)
         return cell
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
         return true
     }
     
@@ -301,8 +306,12 @@ extension CalendarViewController: UITableViewDataSource, UITableViewDelegate{
         let data = todayData.reversed()[selectedRow]
         if data is Entry {
             performSegue(withIdentifier: "updateJournalFromCalendar", sender: self)
-        } else if data is Todo {
+        } else if let todo = data as? Todo {
+            if !todo.complete {
             performSegue(withIdentifier: "updateTodoFromCalendar", sender: self)
+            } else {
+                return
+            }
         }
         
         
