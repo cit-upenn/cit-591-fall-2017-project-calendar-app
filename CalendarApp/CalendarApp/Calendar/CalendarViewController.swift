@@ -43,11 +43,7 @@ class CalendarViewController: UIViewController {
         setupCalendarView()
 
         self.navigationController?.navigationBar.isHidden = true
-        calendarView.scrollToDate(todaysDate)
-
         calendarView.scrollToDate(todaysDate, animateScroll: false)
-        //calendarView.scrollToDate(todaysDate)
-
         calendarView.selectDates([todaysDate])
         
     }
@@ -57,6 +53,7 @@ class CalendarViewController: UIViewController {
         super.viewWillAppear(animated)
         self.fetchData()
         self.navigationController?.navigationBar.isHidden = true
+        calendarView.reloadData()
     }
     
 
@@ -97,7 +94,7 @@ class CalendarViewController: UIViewController {
         formatter.dateFormat = "yyyy MM dd"
         let cellDateString = formatter.string(from: cellState.date)
         let eventsFromCoreData = getCoreDataEvents()
-        let contains = eventsFromCoreData.contains { (element) -> Bool in
+        let containsTodo = eventsFromCoreData.contains { (element) -> Bool in
             if let todo = element as? Todo {
                 if todo.dueDate == nil {return false}
                 let elementdateString = formatter.string(from: todo.dueDate!)
@@ -106,7 +103,11 @@ class CalendarViewController: UIViewController {
                 } else {
                     return false
                 }
-            } else if let journal = element as? Entry {
+            }
+            return false
+        }
+        let containsJournal = eventsFromCoreData.contains { (element) -> Bool in
+            if let journal = element as? Entry {
                 let elementdateString = formatter.string(from: journal.createdAt!)
                 if elementdateString == cellDateString {
                     return true
@@ -116,7 +117,7 @@ class CalendarViewController: UIViewController {
             }
             return false
         }
-        cell.eventDot.isHidden = !contains
+        cell.eventDot.isHidden = !(containsTodo || containsJournal)
     }
     
     func setupViewsOfCalendar(from visibleDates: DateSegmentInfo){
@@ -184,8 +185,6 @@ extension CalendarViewController: JTAppleCalendarViewDelegate {
         guard (cell as? CalendarCell) != nil else {return}
         handleCellTextColor(cell: cell, cellState: cellState)
         handleCellSelected(cell: cell, cellState: cellState)
-
-        //handleCellEvent(view: cell, cellState: cellState)
         selectedDate = date
         self.fetchData()
         handleCellEvent(cell: cell, cellState: cellState)
@@ -210,11 +209,17 @@ extension CalendarViewController{
         var entries = [AnyObject]()
         
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Todo")
+        let request2 = NSFetchRequest<NSFetchRequestResult>(entityName: "Entry")
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         request.returnsObjectsAsFaults = false
+        request2.returnsObjectsAsFaults = false
         do {
             let result = try context.fetch(request)
             for data in result as! [NSManagedObject] {
+                entries.append(data)
+            }
+            let result2 = try context.fetch(request2)
+            for data in result2 as! [NSManagedObject] {
                 entries.append(data)
             }
         } catch {

@@ -153,8 +153,8 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dot" translatesAutoresizingMaskIntoConstraints="NO" id="Jth-RJ-Qp4" userLabel="Event Dot">
-                                                            <rect key="frame" x="27" y="40" width="4" height="4"/>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="dot" translatesAutoresizingMaskIntoConstraints="NO" id="Jth-RJ-Qp4" userLabel="Event Dot">
+                                                            <rect key="frame" x="30" y="40" width="4" height="4"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="4" id="Cd8-QE-FVk"/>
                                                                 <constraint firstAttribute="width" constant="4" id="ZfL-RL-sG8"/>
@@ -516,6 +516,9 @@
                     <navigationItem key="navigationItem" title="Todo" id="Frs-U5-B4D">
                         <barButtonItem key="leftBarButtonItem" title="Show Completed" id="eqy-AK-OsW">
                             <color key="tintColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="showCompleted:" destination="lle-XM-QfC" id="uUE-ed-xWD"/>
+                            </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Add" id="VSl-ni-EP1">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -525,6 +528,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="showCompleted" destination="eqy-AK-OsW" id="P0n-gx-8Kj"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oKA-Qq-aoL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

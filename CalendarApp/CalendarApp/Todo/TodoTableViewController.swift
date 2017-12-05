@@ -177,8 +177,11 @@ class TodoTableViewController: UITableViewController {
         
         return UISwipeActionsConfiguration(actions: [action])
     }
-    
+ 
+    //select a row, if unfinished -> edit page, otherwise no interaction
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let todo = self.resultsController.object(at: indexPath)
+        if todo.complete {return}
         performSegue(withIdentifier: "ShowAddTodo", sender: tableView.cellForRow(at: indexPath))
     }
   
@@ -198,6 +201,7 @@ class TodoTableViewController: UITableViewController {
         }
     }
     
+    // show completed/hide completed tasks
     @IBAction func showCompleted(_ sender: UIBarButtonItem) {
         if sender.title == "Show Completed" {
             
@@ -242,8 +246,8 @@ extension TodoTableViewController:NSFetchedResultsControllerDelegate {
         case .move:
             tableView.moveRow(at: indexPath!, to: newIndexPath!)
             tableView.reloadData()
-        default:
-            break
+//        default:
+//            break
         }
     }
 
