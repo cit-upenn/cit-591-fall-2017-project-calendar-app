@@ -332,12 +332,30 @@ extension CalendarViewController: UITableViewDataSource, UITableViewDelegate{
             } else if let todo = data as? Todo {
                 self.context.delete(todo)
             }
-            
             (UIApplication.shared.delegate as! AppDelegate).saveContext()
-            
             self.fetchData()
         }
+        let check = UITableViewRowAction(style: .default, title: "Check") { (action, indexPath) in
+            
+            let data = self.todayData.reversed()[indexPath.row]
+            if let todo = data as? Todo {
+                todo.complete = true
+            }
+            (UIApplication.shared.delegate as! AppDelegate).saveContext()
+            self.fetchData()
+        }
+        check.backgroundColor = UIColor.init(colorWithHexValue: 0xffb735)
         delete.backgroundColor = UIColor(red: 36/255, green: 39/255, blue: 148/255, alpha: 1.0)
+        let data = self.todayData.reversed()[indexPath.row]
+        if data is Entry {
+            return [delete]
+        } else if let todo = data as? Todo {
+            if !todo.complete {
+                return [check, delete]
+            } else {
+                return [delete]
+            }
+        }
         return [delete]
     }
     

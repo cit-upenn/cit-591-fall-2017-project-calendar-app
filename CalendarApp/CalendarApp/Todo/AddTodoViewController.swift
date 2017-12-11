@@ -111,17 +111,6 @@ class AddTodoViewController: UIViewController {
         
         do {
             try managedContext.save()
-            
-            //            let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Todo")
-            //            request.returnsObjectsAsFaults = false
-            //            do {
-            //                let result = try managedContext.fetch(request)
-            //                for data in result as! [NSManagedObject] {
-            //                    print(data)
-            //                }
-            //            } catch {
-            //                print("Failed")
-            //            }
             dismissAndResign()
         } catch {
             print("Error saving todo: \(error)" )
@@ -203,12 +192,16 @@ class AddTodoViewController: UIViewController {
 
 
 extension AddTodoViewController: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        textView.text.removeAll()
+    }
+    
     func textViewDidChangeSelection(_ textView: UITextView) {
         textView.becomeFirstResponder()
-        bottomButtons.isHidden = false
         
+        bottomButtons.isHidden = false
         if doneButton.isHidden{
-            textView.text.removeAll()
+            
             textView.textColor = .white
             
             doneButton.isHidden = false

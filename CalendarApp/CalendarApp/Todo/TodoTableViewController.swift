@@ -45,33 +45,6 @@ class TodoTableViewController: UITableViewController {
         }
     
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        // Request
-        let request: NSFetchRequest<Todo> = Todo.fetchRequest()
-        let sortDescriptor1 = NSSortDescriptor(key: "dueDate", ascending: true)
-        let sortDescriptor2 = NSSortDescriptor(key: "title", ascending: true)
-        
-        // Init
-        request.sortDescriptors = [sortDescriptor1, sortDescriptor2]
-        request.predicate = NSPredicate(format: "complete == false")
-        resultsController = NSFetchedResultsController(
-            fetchRequest: request,
-            managedObjectContext: managedContext,
-            sectionNameKeyPath: nil,
-            cacheName: nil
-        )
-        resultsController.delegate = self
-        
-        // Fetch
-        do {
-            try resultsController.performFetch()
-        } catch {
-            print("Perform fetch error: \(error)")
-        }
-        
-    }
 
     // MARK: - Table view data source
 
@@ -246,7 +219,7 @@ extension TodoTableViewController:NSFetchedResultsControllerDelegate {
         case .move:
             tableView.moveRow(at: indexPath!, to: newIndexPath!)
             tableView.reloadData()
-//        default:
+//         default:
 //            break
         }
     }
