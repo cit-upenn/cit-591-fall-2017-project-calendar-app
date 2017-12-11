@@ -193,7 +193,13 @@ class AddTodoViewController: UIViewController {
 
 extension AddTodoViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
-        textView.text.removeAll()
+        if textView.text == "Enter your todo here..." {
+            textView.text.removeAll()
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        
     }
     
     func textViewDidChangeSelection(_ textView: UITextView) {

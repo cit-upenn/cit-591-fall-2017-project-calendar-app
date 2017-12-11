@@ -122,8 +122,8 @@ class TodoTableViewController: UITableViewController {
                 completion(false)
             }
         }
-        action.image = #imageLiteral(resourceName: "if_trash-o_1608715")
-        action.backgroundColor = .red
+        action.title = "Delete"
+        action.backgroundColor = UIColor.init(colorWithHexValue: 0x242794)
         
         return UISwipeActionsConfiguration(actions: [action])
     }
@@ -145,8 +145,8 @@ class TodoTableViewController: UITableViewController {
                 completion(false)
             }
         }
-        action.image = #imageLiteral(resourceName: "if_Check_1063906")
-        action.backgroundColor = .green
+        action.title = "Check"
+        action.backgroundColor = UIColor.init(colorWithHexValue: 0xffb735)
         
         return UISwipeActionsConfiguration(actions: [action])
     }
