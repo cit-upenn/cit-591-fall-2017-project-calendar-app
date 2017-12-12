@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1820DC601FDF7B0800196D54 /* AddTodoViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1820DC5F1FDF7B0800196D54 /* AddTodoViewControllerTest.swift */; };
 		186934D11FD104E6000E94B3 /* AddTodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186934D01FD104E6000E94B3 /* AddTodoViewController.swift */; };
 		18D914A11FCFAE0E005B571A /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D914A01FCFAE0E005B571A /* CalendarCell.swift */; };
 		18D914A31FCFAE8C005B571A /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D914A21FCFAE8C005B571A /* CalendarViewController.swift */; };
@@ -39,6 +40,7 @@
 
 /* Begin PBXFileReference section */
 		0919D87D8D605C4E7529B515 /* Pods_CalendarAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CalendarAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1820DC5F1FDF7B0800196D54 /* AddTodoViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoViewControllerTest.swift; sourceTree = "<group>"; };
 		186934D01FD104E6000E94B3 /* AddTodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoViewController.swift; sourceTree = "<group>"; };
 		18D914A01FCFAE0E005B571A /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
 		18D914A21FCFAE8C005B571A /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				D0065A4F1FCF6C0C00978E46 /* CalendarAppTests.swift */,
+				1820DC5F1FDF7B0800196D54 /* AddTodoViewControllerTest.swift */,
 				D0065A511FCF6C0C00978E46 /* Info.plist */,
 			);
 			path = CalendarAppTests;
@@ -412,6 +415,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1820DC601FDF7B0800196D54 /* AddTodoViewControllerTest.swift in Sources */,
 				D0065A501FCF6C0C00978E46 /* CalendarAppTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -559,6 +563,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = G27NS9279K;
 				INFOPLIST_FILE = CalendarApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = CalendarApp.CalendarApp;
@@ -574,6 +579,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = G27NS9279K;
 				INFOPLIST_FILE = CalendarApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = CalendarApp.CalendarApp;
