@@ -184,7 +184,8 @@ class AddTodoViewController: UIViewController {
     fileprivate func dismissDateSelector(){
         dateSelector.isHidden = true
         bottomButtons.isHidden = false
-        textView.becomeFirstResponder()
+        //textView.becomeFirstResponder()
+        bottomConstraint.constant = 16
     }
     
     

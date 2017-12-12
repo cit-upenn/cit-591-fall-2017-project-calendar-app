@@ -599,14 +599,14 @@
                                 <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="xh6-QJ-ybT" userLabel="Top Stack">
-                                <rect key="frame" x="0.0" y="20" width="375" height="333"/>
+                                <rect key="frame" x="0.0" y="20.5" width="375" height="298"/>
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="245" text="Enter your todo here..." translatesAutoresizingMaskIntoConstraints="NO" id="eXy-kC-3wC">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="250"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="225"/>
                                         <color key="backgroundColor" red="0.56862745100000001" green="0.74509803919999995" blue="0.90588235289999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="250" id="9o7-Zs-2ML"/>
+                                            <constraint firstAttribute="height" constant="225" id="9o7-Zs-2ML"/>
                                         </constraints>
                                         <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="0.75" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="28"/>
@@ -616,13 +616,13 @@
                                         </connections>
                                     </textView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="gTY-7J-deD">
-                                        <rect key="frame" x="0.0" y="250" width="375" height="83"/>
+                                        <rect key="frame" x="0.0" y="225" width="375" height="73"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="40" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q1o-Dn-Cc0" userLabel="Set Due Date">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="35"/>
                                                 <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="40" id="o8b-dv-tCe"/>
+                                                    <constraint firstAttribute="height" constant="35" id="o8b-dv-tCe"/>
                                                     <constraint firstAttribute="width" constant="375" id="tTM-7C-G1M"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
@@ -634,7 +634,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="40" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I3B-0A-eFV" userLabel="Set Reminder Date">
-                                                <rect key="frame" x="0.0" y="43" width="375" height="40"/>
+                                                <rect key="frame" x="0.0" y="38" width="375" height="35"/>
                                                 <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
                                                 <state key="normal" title="Set a reminder date">
@@ -653,7 +653,7 @@
                                 </constraints>
                             </stackView>
                             <stackView contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="HZU-Kv-Yw4" userLabel="Bottom Buttons">
-                                <rect key="frame" x="16" y="595" width="343" height="72"/>
+                                <rect key="frame" x="16" y="579" width="343" height="72"/>
                                 <subviews>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="wGt-3D-epv">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="29"/>
@@ -714,11 +714,11 @@
                             <constraint firstItem="3gU-OS-5Ac" firstAttribute="leading" secondItem="ye9-qz-gcH" secondAttribute="leading" id="2ds-0o-qEn"/>
                             <constraint firstItem="ye9-qz-gcH" firstAttribute="trailing" secondItem="HZU-Kv-Yw4" secondAttribute="trailing" constant="16" id="3Wu-gT-4uJ"/>
                             <constraint firstItem="HZU-Kv-Yw4" firstAttribute="leading" secondItem="ye9-qz-gcH" secondAttribute="leading" constant="16" id="CWZ-q2-3s4"/>
-                            <constraint firstItem="xh6-QJ-ybT" firstAttribute="top" secondItem="ye9-qz-gcH" secondAttribute="top" id="Jik-be-Qdf"/>
-                            <constraint firstAttribute="bottom" secondItem="3gU-OS-5Ac" secondAttribute="bottom" id="aWR-9a-Q4m"/>
                             <constraint firstItem="xh6-QJ-ybT" firstAttribute="leading" secondItem="ye9-qz-gcH" secondAttribute="leading" id="cGS-ul-HYM"/>
+                            <constraint firstItem="ye9-qz-gcH" firstAttribute="bottom" secondItem="3gU-OS-5Ac" secondAttribute="bottom" id="ksu-Kl-3FX"/>
                             <constraint firstItem="ye9-qz-gcH" firstAttribute="trailing" secondItem="xh6-QJ-ybT" secondAttribute="trailing" id="n3g-dW-Euv"/>
-                            <constraint firstAttribute="bottom" secondItem="HZU-Kv-Yw4" secondAttribute="bottom" id="uao-bU-Vut"/>
+                            <constraint firstAttribute="bottom" secondItem="HZU-Kv-Yw4" secondAttribute="bottom" constant="16" id="uao-bU-Vut"/>
+                            <constraint firstItem="xh6-QJ-ybT" firstAttribute="top" secondItem="ye9-qz-gcH" secondAttribute="top" id="v5w-jd-26q"/>
                             <constraint firstItem="3gU-OS-5Ac" firstAttribute="trailing" secondItem="ye9-qz-gcH" secondAttribute="trailing" id="wii-sv-Mcm"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ye9-qz-gcH"/>
