@@ -20,6 +20,7 @@ class TodoTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNavBar()
         
         // Request
         let request: NSFetchRequest<Todo> = Todo.fetchRequest()
@@ -44,6 +45,13 @@ class TodoTableViewController: UITableViewController {
             print("Perform fetch error: \(error)")
         }
     
+    }
+    
+    func setupNavBar(){
+        //setup navigation bar
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.title = "Todo"
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 30),NSAttributedStringKey.foregroundColor: UIColor.white]
     }
 
     // MARK: - Table view data source

@@ -623,7 +623,6 @@
                                                 <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="35" id="o8b-dv-tCe"/>
-                                                    <constraint firstAttribute="width" constant="375" id="tTM-7C-G1M"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
                                                 <state key="normal" title="Set a due date">
@@ -645,6 +644,10 @@
                                                 </connections>
                                             </button>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="q1o-Dn-Cc0" secondAttribute="trailing" id="GOm-O5-Vsb"/>
+                                            <constraint firstItem="q1o-Dn-Cc0" firstAttribute="leading" secondItem="gTY-7J-deD" secondAttribute="leading" id="IfS-z0-2Xn"/>
+                                        </constraints>
                                     </stackView>
                                 </subviews>
                                 <constraints>
