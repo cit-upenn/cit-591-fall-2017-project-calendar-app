@@ -199,10 +199,6 @@ extension AddTodoViewController: UITextViewDelegate {
         }
     }
     
-    func textViewDidEndEditing(_ textView: UITextView) {
-        
-    }
-    
     func textViewDidChangeSelection(_ textView: UITextView) {
         textView.becomeFirstResponder()
         
