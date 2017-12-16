@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Iau-5h-s15">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Iau-5h-s15">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -359,11 +359,11 @@
             <objects>
                 <viewController id="ty2-pT-3u0" customClass="UpdateJournalViewController" customModule="CalendarApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RDk-CT-RXZ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="bVz-9e-stQ">
-                                <rect key="frame" x="16" y="69" width="343" height="505"/>
+                                <rect key="frame" x="16" y="5" width="343" height="505"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PvN-bV-DUT">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="30"/>
@@ -414,7 +414,7 @@
         <!--Journal-->
         <scene sceneID="0jM-wt-0En">
             <objects>
-                <tableViewController id="eMp-23-T3c" customClass="EntriesTableViewController" customModule="CalendarApp" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="EntriesTableViewController" id="eMp-23-T3c" customClass="EntriesTableViewController" customModule="CalendarApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="0IV-fV-T8h">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -753,6 +753,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="nzQ-52-oyP"/>
-        <segue reference="khg-9r-S0L"/>
+        <segue reference="fZc-Pb-zI1"/>
     </inferredMetricsTieBreakers>
 </document>

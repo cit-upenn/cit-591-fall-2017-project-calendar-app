@@ -25,6 +25,8 @@
 		D01198981FCFB3CD00D9F917 /* EntriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01198951FCFB3CD00D9F917 /* EntriesTableViewController.swift */; };
 		D01198991FCFB3CD00D9F917 /* AddEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01198961FCFB3CD00D9F917 /* AddEntryViewController.swift */; };
 		D011989A1FCFB3CD00D9F917 /* UpdateJournalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01198971FCFB3CD00D9F917 /* UpdateJournalViewController.swift */; };
+		D03564931FE5BC9C00B900E4 /* EntriesTableViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03564921FE5BC9C00B900E4 /* EntriesTableViewControllerTest.swift */; };
+		D03564951FE5D77200B900E4 /* CalendarTableViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03564941FE5D77200B900E4 /* CalendarTableViewControllerTest.swift */; };
 		F87DE626F951B4E64BEC18BC /* Pods_CalendarAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0919D87D8D605C4E7529B515 /* Pods_CalendarAppTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -66,6 +68,8 @@
 		D01198951FCFB3CD00D9F917 /* EntriesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntriesTableViewController.swift; sourceTree = "<group>"; };
 		D01198961FCFB3CD00D9F917 /* AddEntryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEntryViewController.swift; sourceTree = "<group>"; };
 		D01198971FCFB3CD00D9F917 /* UpdateJournalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateJournalViewController.swift; sourceTree = "<group>"; };
+		D03564921FE5BC9C00B900E4 /* EntriesTableViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntriesTableViewControllerTest.swift; sourceTree = "<group>"; };
+		D03564941FE5D77200B900E4 /* CalendarTableViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTableViewControllerTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +173,8 @@
 		D0065A4E1FCF6C0C00978E46 /* CalendarAppTests */ = {
 			isa = PBXGroup;
 			children = (
+				D03564941FE5D77200B900E4 /* CalendarTableViewControllerTest.swift */,
+				D03564921FE5BC9C00B900E4 /* EntriesTableViewControllerTest.swift */,
 				D0065A4F1FCF6C0C00978E46 /* CalendarAppTests.swift */,
 				1820DC5F1FDF7B0800196D54 /* AddTodoViewControllerTest.swift */,
 				D0065A511FCF6C0C00978E46 /* Info.plist */,
@@ -416,7 +422,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				1820DC601FDF7B0800196D54 /* AddTodoViewControllerTest.swift in Sources */,
+				D03564951FE5D77200B900E4 /* CalendarTableViewControllerTest.swift in Sources */,
 				D0065A501FCF6C0C00978E46 /* CalendarAppTests.swift in Sources */,
+				D03564931FE5BC9C00B900E4 /* EntriesTableViewControllerTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
