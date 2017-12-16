@@ -40,8 +40,9 @@ class CalendarViewController: UIViewController {
         super.viewDidLoad()
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        self.fetchData()
         setupCalendarView()
-
+        
         self.navigationController?.navigationBar.isHidden = true
         calendarView.scrollToDate(todaysDate, animateScroll: false)
         calendarView.selectDates([todaysDate])
@@ -244,7 +245,6 @@ extension UIColor {
 extension CalendarViewController: UITableViewDataSource, UITableViewDelegate{
     
     // MARK: - Table view data source
-    //TODO: add todo data
     func fetchData() {
         //setup predicate
         var calendar = Calendar.current

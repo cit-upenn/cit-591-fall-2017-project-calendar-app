@@ -19,7 +19,7 @@
         <!--Ib Calendar Data Source-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="CalendarViewController" customModule="CalendarApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CalendarViewController" id="BYZ-38-t0r" customClass="CalendarViewController" customModule="CalendarApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="jHQ-M6-xzg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -359,11 +359,11 @@
             <objects>
                 <viewController id="ty2-pT-3u0" customClass="UpdateJournalViewController" customModule="CalendarApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RDk-CT-RXZ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="bVz-9e-stQ">
-                                <rect key="frame" x="16" y="5" width="343" height="505"/>
+                                <rect key="frame" x="16" y="69" width="343" height="505"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PvN-bV-DUT">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="30"/>
@@ -753,6 +753,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="nzQ-52-oyP"/>
-        <segue reference="fZc-Pb-zI1"/>
+        <segue reference="khg-9r-S0L"/>
     </inferredMetricsTieBreakers>
 </document>

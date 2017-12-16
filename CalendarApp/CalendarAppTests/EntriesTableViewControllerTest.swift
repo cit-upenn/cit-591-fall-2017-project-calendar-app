@@ -13,9 +13,6 @@ import CoreData
 class EntriesTableViewControllerTest: XCTestCase {
     
     var entriesViewController: EntriesTableViewController!
-    var context: NSManagedObjectContext!
-    var entry: Entry!
-
     
     // Put setup code here. This method is called before the invocation of each test method in the class.
     override func setUp() {
@@ -23,24 +20,13 @@ class EntriesTableViewControllerTest: XCTestCase {
         super.setUp()
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         entriesViewController = storyboard.instantiateViewController(withIdentifier: "EntriesTableViewController") as! EntriesTableViewController
-        
-        context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        entry = Entry(context: context)
-
+       
     }
     
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     override func tearDown() {
         super.tearDown()
         entriesViewController = nil
-    }
-    
-    //
-    func addData(rowIndex: Int){
-        entry.bodyText = "row \(rowIndex)"
-        entry.createdAt = Date()
-        (UIApplication.shared.delegate as! AppDelegate).saveContext()
-        entriesViewController.fetchEntries()
     }
     
     func testViewLoad() {
