@@ -16,7 +16,6 @@ class TodoUITests: XCTestCase {
         super.setUp()
         continueAfterFailure = false
         // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
-        app.launchArguments = ["--Reset"]
         app.launch()        
     }
     
@@ -61,17 +60,6 @@ class TodoUITests: XCTestCase {
         XCTAssert(cell.staticTexts["Due date: \(due)"].exists, "A todo entry with title test todo should appear")    
     }
     
-    func testDoneButtonShowup() {
-        app.tabBars.buttons["Todo"].tap()
-        app.navigationBars["Todo"].buttons["Add"].tap()
-        
-        let doneButton = app.buttons.element(matching: .button, identifier: "doneButton")
-        XCTAssertFalse(doneButton.exists)
-        
-        let textView = app.children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element.children(matching: .other).element(boundBy: 0).children(matching: .textView).element
-        textView.tap()
-        textView.typeText("1")
-        XCTAssertTrue(doneButton.exists, "done button should show up ")
-    }
+  
     
 }

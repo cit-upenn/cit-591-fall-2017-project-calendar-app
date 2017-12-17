@@ -1,15 +1,16 @@
 //
-//  CalendarAppUITests.swift
+//  AddTodoViewUITests.swift
 //  CalendarAppUITests
 //
-//  Created by Olivia Sun on 12/16/17.
+//  Created by Olivia Sun on 12/17/17.
 //  Copyright © 2017 CalendarApp. All rights reserved.
 //
 
 import XCTest
 
-class CalendarAppUITests: XCTestCase {
-        
+class AddTodoViewUITests: XCTestCase {
+    let app = XCUIApplication()
+    
     override func setUp() {
         super.setUp()
         
@@ -28,9 +29,17 @@ class CalendarAppUITests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testDoneButtonShowup() {
+        app.tabBars.buttons["Todo"].tap()
+        app.navigationBars["Todo"].buttons["Add"].tap()
+        
+        let doneButton = app.buttons.element(matching: .button, identifier: "doneButton")
+        XCTAssertFalse(doneButton.exists)
+        
+        let textView = app.children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element.children(matching: .other).element(boundBy: 0).children(matching: .textView).element
+        textView.tap()
+        textView.typeText("1")
+        XCTAssertTrue(doneButton.exists, "done button should show up ")
     }
     
 }

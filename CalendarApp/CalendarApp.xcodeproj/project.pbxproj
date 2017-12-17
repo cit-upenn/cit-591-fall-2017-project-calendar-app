@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1820DC621FE5BDF800196D54 /* TodoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1820DC611FE5BDF800196D54 /* TodoTests.swift */; };
-		1820DC6C1FE5CB7A00196D54 /* CalendarAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1820DC6B1FE5CB7A00196D54 /* CalendarAppUITests.swift */; };
 		1820DC731FE5CB8600196D54 /* TodoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1820DC631FE5CAE800196D54 /* TodoUITests.swift */; };
+		183F7FE71FE6322800EB3B07 /* AddTodoViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183F7FE61FE6322800EB3B07 /* AddTodoViewUITests.swift */; };
 		186934D11FD104E6000E94B3 /* AddTodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186934D01FD104E6000E94B3 /* AddTodoViewController.swift */; };
 		18D914A11FCFAE0E005B571A /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D914A01FCFAE0E005B571A /* CalendarCell.swift */; };
 		18D914A31FCFAE8C005B571A /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D914A21FCFAE8C005B571A /* CalendarViewController.swift */; };
@@ -53,8 +53,8 @@
 		1820DC611FE5BDF800196D54 /* TodoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoTests.swift; sourceTree = "<group>"; };
 		1820DC631FE5CAE800196D54 /* TodoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoUITests.swift; sourceTree = "<group>"; };
 		1820DC691FE5CB7A00196D54 /* CalendarAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalendarAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		1820DC6B1FE5CB7A00196D54 /* CalendarAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarAppUITests.swift; sourceTree = "<group>"; };
 		1820DC6D1FE5CB7A00196D54 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		183F7FE61FE6322800EB3B07 /* AddTodoViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoViewUITests.swift; sourceTree = "<group>"; };
 		186934D01FD104E6000E94B3 /* AddTodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoViewController.swift; sourceTree = "<group>"; };
 		18D914A01FCFAE0E005B571A /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
 		18D914A21FCFAE8C005B571A /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
@@ -115,7 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				1820DC631FE5CAE800196D54 /* TodoUITests.swift */,
-				1820DC6B1FE5CB7A00196D54 /* CalendarAppUITests.swift */,
+				183F7FE61FE6322800EB3B07 /* AddTodoViewUITests.swift */,
 				1820DC6D1FE5CB7A00196D54 /* Info.plist */,
 			);
 			path = CalendarAppUITests;
@@ -463,7 +463,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1820DC6C1FE5CB7A00196D54 /* CalendarAppUITests.swift in Sources */,
+				183F7FE71FE6322800EB3B07 /* AddTodoViewUITests.swift in Sources */,
 				1820DC731FE5CB8600196D54 /* TodoUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
