@@ -14,18 +14,10 @@ class TodoUITests: XCTestCase {
         
     override func setUp() {
         super.setUp()
-        
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-        
-        // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
         // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
         app.launchArguments = ["--Reset"]
-        app.launch()
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
-        //reset to original state
-        
+        app.launch()        
     }
     
     override func tearDown() {
@@ -52,8 +44,6 @@ class TodoUITests: XCTestCase {
     }
     
     func testCellShowDueDate() {
-        
-        let app = XCUIApplication()
         app.tabBars.buttons["Todo"].tap()
         app.navigationBars["Todo"].buttons["Add"].tap()
         
@@ -69,6 +59,19 @@ class TodoUITests: XCTestCase {
         
         let cell = app.tables.cells.element
         XCTAssert(cell.staticTexts["Due date: \(due)"].exists, "A todo entry with title test todo should appear")    
+    }
+    
+    func testDoneButtonShowup() {
+        app.tabBars.buttons["Todo"].tap()
+        app.navigationBars["Todo"].buttons["Add"].tap()
+        
+        let doneButton = app.buttons.element(matching: .button, identifier: "doneButton")
+        XCTAssertFalse(doneButton.exists)
+        
+        let textView = app.children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element.children(matching: .other).element(boundBy: 0).children(matching: .textView).element
+        textView.tap()
+        textView.typeText("1")
+        XCTAssertTrue(doneButton.exists, "done button should show up ")
     }
     
 }

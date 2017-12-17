@@ -13,9 +13,19 @@ import CoreData
 class TodoTests: XCTestCase {
     var vc: TodoTableViewController!
     let persistentContainer = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
+    var resultsController: NSFetchedResultsController<Todo>!
+    let request: NSFetchRequest<Todo> = Todo.fetchRequest()
     
     override func setUp() {
         super.setUp()
+        
+        vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TodoTableViewController") as! TodoTableViewController
+        // Put setup code here. This method is called before the invocation of each test method in the class.
+    }
+    
+    override func tearDown() {
+        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        super.tearDown()
 //        guard let storeURL = persistentContainer.persistentStoreCoordinator.persistentStores.first?.url else {
 //            return
 //        }
@@ -24,13 +34,6 @@ class TodoTests: XCTestCase {
 //        } catch {
 //            print(error)
 //        }
-        vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TodoTableViewController") as! TodoTableViewController
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
     }
     
     
@@ -52,10 +55,7 @@ class TodoTests: XCTestCase {
     
     func testPastDueSubtitleColor(){
         let managedContext = vc.managedContext
-        let resultsController: NSFetchedResultsController<Todo>!
-        let request: NSFetchRequest<Todo> = Todo.fetchRequest()
-        
-        var todo = Todo(context: managedContext)
+        let todo = Todo(context: managedContext)
         todo.title = "test"
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
@@ -69,9 +69,8 @@ class TodoTests: XCTestCase {
             print("Error saving todo: \(error)" )
         }
         
-        let sortDescriptor1 = NSSortDescriptor(key: "dueDate", ascending: true)
-        let sortDescriptor2 = NSSortDescriptor(key: "title", ascending: true)
-        request.sortDescriptors = [sortDescriptor1, sortDescriptor2]
+        let sortDescriptor1 = NSSortDescriptor(key: "setupDate", ascending: false)
+        request.sortDescriptors = [sortDescriptor1]
         request.predicate = NSPredicate(format: "complete == false")
         resultsController = NSFetchedResultsController(
             fetchRequest: request,
@@ -85,9 +84,12 @@ class TodoTests: XCTestCase {
         } catch {
             print("Perform fetch error: \(error)")
         }
+        vc.tableView.reloadData()
         let cell = vc.tableView.cellForRow(at: IndexPath(item: 0, section: 0))
         
         XCTAssert(cell!.detailTextLabel!.textColor == .red, "past due todo's due date should show in red")
     }
+    
+
     
 }
