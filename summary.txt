@@ -3,6 +3,7 @@ Days App
 Project Description: 	
 
 	Days is an iOS app that allows user to access the calendar, create journals and todo\'92s for the date desired. User can add, edit, check(only applicable to todos), and delete entries they created. All data is stored locally on user\'92s device through CoreData. The program is written in Swift. The JTAppleCanlendar library is imported through Cocoapods to construct the calendar. \
+	This app is only compatible with iPhone 6-8, and iPhone 6-8 Plus models. 
 
 Work Breakdown:
 Interface design: Ao Sun & Jiaying Wang
