@@ -212,6 +212,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <accessibility key="accessibilityConfiguration">
+                                            <bool key="isElement" value="YES"/>
+                                        </accessibility>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -448,6 +451,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <accessibility key="accessibilityConfiguration">
+                                    <bool key="isElement" value="YES"/>
+                                </accessibility>
                             </tableViewCell>
                         </prototypes>
                         <sections/>
@@ -948,7 +954,7 @@ AAAAAAAAK0w
         </image>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ymS-l3-rGY"/>
+        <segue reference="nzQ-52-oyP"/>
         <segue reference="khg-9r-S0L"/>
     </inferredMetricsTieBreakers>
 </document>

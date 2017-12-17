@@ -28,6 +28,7 @@
 		D01198991FCFB3CD00D9F917 /* AddEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01198961FCFB3CD00D9F917 /* AddEntryViewController.swift */; };
 		D011989A1FCFB3CD00D9F917 /* UpdateJournalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01198971FCFB3CD00D9F917 /* UpdateJournalViewController.swift */; };
 		D03564931FE5BC9C00B900E4 /* EntriesTableViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03564921FE5BC9C00B900E4 /* EntriesTableViewControllerTest.swift */; };
+		D035649B1FE5EF3300B900E4 /* EntriesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D035649A1FE5EF3300B900E4 /* EntriesUITests.swift */; };
 		F87DE626F951B4E64BEC18BC /* Pods_CalendarAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0919D87D8D605C4E7529B515 /* Pods_CalendarAppTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -81,6 +82,8 @@
 		D01198961FCFB3CD00D9F917 /* AddEntryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEntryViewController.swift; sourceTree = "<group>"; };
 		D01198971FCFB3CD00D9F917 /* UpdateJournalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateJournalViewController.swift; sourceTree = "<group>"; };
 		D03564921FE5BC9C00B900E4 /* EntriesTableViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntriesTableViewControllerTest.swift; sourceTree = "<group>"; };
+		D035649A1FE5EF3300B900E4 /* EntriesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntriesUITests.swift; sourceTree = "<group>"; };
+
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +117,7 @@
 		1820DC6A1FE5CB7A00196D54 /* CalendarAppUITests */ = {
 			isa = PBXGroup;
 			children = (
+				D035649A1FE5EF3300B900E4 /* EntriesUITests.swift */,
 				1820DC631FE5CAE800196D54 /* TodoUITests.swift */,
 				183F7FE61FE6322800EB3B07 /* AddTodoViewUITests.swift */,
 				1820DC6D1FE5CB7A00196D54 /* Info.plist */,
@@ -463,7 +467,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+
 				183F7FE71FE6322800EB3B07 /* AddTodoViewUITests.swift in Sources */,
+				D035649B1FE5EF3300B900E4 /* EntriesUITests.swift in Sources */,
+				1820DC6C1FE5CB7A00196D54 /* CalendarAppUITests.swift in Sources */,
 				1820DC731FE5CB8600196D54 /* TodoUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
