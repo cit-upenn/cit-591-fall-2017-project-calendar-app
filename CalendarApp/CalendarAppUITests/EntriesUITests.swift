@@ -61,6 +61,15 @@ class EntriesUITests: XCTestCase {
         XCTAssert(app.tables.cells.staticTexts["UPDATE TEST ADD"].exists, "The entry with title \"UPDATE TEST UPDATE\" should appear")
     }
     
+    func testDelete(){
+        
+        app.tabBars.buttons["Journal"].tap()
+        app.tables.cells.element(boundBy: 0).swipeLeft()
+        app.tables.cells.element(boundBy: 0).buttons["Delete"].tap()
+        
+        XCTAssert(!app.tables.cells.staticTexts["UPDATE TEST ADD"].exists, "The entry with title \"UPDATE TEST UPDATE\" should disappear")
+        
+    }
     
 }
 
