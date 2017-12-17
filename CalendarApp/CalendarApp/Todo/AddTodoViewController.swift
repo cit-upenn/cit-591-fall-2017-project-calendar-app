@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 import UserNotifications
 
+// this class represents the controller of the addtodoview 
 class AddTodoViewController: UIViewController {
 
     //MARK: - Outlets
@@ -35,10 +36,11 @@ class AddTodoViewController: UIViewController {
     var typeDatePicked = ""
     
     
-
+    // This method is called after the view controller has loaded its view hierarchy into memory.
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //the view controller observes whether the keyboard shows
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(keyboardWillShow(with:)),
@@ -65,6 +67,8 @@ class AddTodoViewController: UIViewController {
     }
     
     //MARK: Actions
+    
+    // this method is called when the keyboard is about to show
     @objc func keyboardWillShow(with notification: Notification){
         let key = "UIKeyboardFrameEndUserInfoKey"
         
@@ -79,17 +83,18 @@ class AddTodoViewController: UIViewController {
         }
     }
     
+    // this function dismiss and resigns the keyboard
     fileprivate func dismissAndResign() {
         dismiss(animated: true)
         textView.resignFirstResponder()
     }
     
-    
+    // cancel button
     @IBAction func cancel(_ sender: UIButton) {
         dismissAndResign()
     }
     
-    
+    // done button
     @IBAction func done(_ sender: UIButton) {
         guard let title = textView.text, !title.isEmpty else {return}
         if let todo = self.todo {
@@ -138,7 +143,7 @@ class AddTodoViewController: UIViewController {
     }
    
     
-    
+    // set due button
     @IBAction func setDueDate(_ sender:UIButton) {
         textView.resignFirstResponder()
         bottomButtons.isHidden = true
@@ -150,6 +155,7 @@ class AddTodoViewController: UIViewController {
         }
     }
     
+    // set reminder button
     @IBAction func setReminderDate(_ sender: UIButton) {
         textView.resignFirstResponder()
         bottomButtons.isHidden = true
@@ -161,11 +167,12 @@ class AddTodoViewController: UIViewController {
         }
     }
     
+    //cancel button in date selector
     @IBAction func cancelSetDate(_ sender: UIBarButtonItem) {
         dismissDateSelector()
     }
     
-    
+    // done button in date selector
     @IBAction func doneSetDate(_ sender: UIBarButtonItem) {
         dateFormatter.dateStyle = DateFormatter.Style.short
         dateFormatter.timeStyle = DateFormatter.Style.short
@@ -181,6 +188,7 @@ class AddTodoViewController: UIViewController {
         dismissDateSelector()
     }
     
+    // this method dismissed the date selector
     fileprivate func dismissDateSelector(){
         dateSelector.isHidden = true
         bottomButtons.isHidden = false
@@ -193,12 +201,15 @@ class AddTodoViewController: UIViewController {
 
 
 extension AddTodoViewController: UITextViewDelegate {
+    
+    // this method tells the delegate that editing of the specified text view has begun.
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.text == "Enter your todo here..." {
             textView.text.removeAll()
         }
     }
     
+    // this method tells the delegate that the text selection changed in the specified text view.
     func textViewDidChangeSelection(_ textView: UITextView) {
         textView.becomeFirstResponder()
         

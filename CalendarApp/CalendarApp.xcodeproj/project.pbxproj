@@ -13,7 +13,6 @@
 		186934D11FD104E6000E94B3 /* AddTodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186934D01FD104E6000E94B3 /* AddTodoViewController.swift */; };
 		18D914A11FCFAE0E005B571A /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D914A01FCFAE0E005B571A /* CalendarCell.swift */; };
 		18D914A31FCFAE8C005B571A /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D914A21FCFAE8C005B571A /* CalendarViewController.swift */; };
-		18D914A71FD0807E005B571A /* CalendarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D914A61FD0807E005B571A /* CalendarTableViewCell.swift */; };
 		18F81E591FD0A53A00DFA8AA /* TodoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F81E571FD0A53A00DFA8AA /* TodoTableViewController.swift */; };
 		960BAEE3062789E5AEBB1F3A /* Pods_CalendarApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B28E26F0DC25C53EBC50E2AA /* Pods_CalendarApp.framework */; };
 		D0065A381FCF6C0C00978E46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0065A371FCF6C0C00978E46 /* AppDelegate.swift */; };
@@ -59,7 +58,6 @@
 		186934D01FD104E6000E94B3 /* AddTodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoViewController.swift; sourceTree = "<group>"; };
 		18D914A01FCFAE0E005B571A /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
 		18D914A21FCFAE8C005B571A /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
-		18D914A61FD0807E005B571A /* CalendarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTableViewCell.swift; sourceTree = "<group>"; };
 		18F81E571FD0A53A00DFA8AA /* TodoTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoTableViewController.swift; sourceTree = "<group>"; };
 		29172DBAC839EFE4A5DCC744 /* Pods-CalendarApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CalendarApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CalendarApp/Pods-CalendarApp.debug.xcconfig"; sourceTree = "<group>"; };
 		7830476CB266CF29B22820F3 /* Pods-CalendarAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CalendarAppTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CalendarAppTests/Pods-CalendarAppTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -83,7 +81,6 @@
 		D01198971FCFB3CD00D9F917 /* UpdateJournalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateJournalViewController.swift; sourceTree = "<group>"; };
 		D03564921FE5BC9C00B900E4 /* EntriesTableViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntriesTableViewControllerTest.swift; sourceTree = "<group>"; };
 		D035649A1FE5EF3300B900E4 /* EntriesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntriesUITests.swift; sourceTree = "<group>"; };
-
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,7 +127,6 @@
 			children = (
 				18D914A01FCFAE0E005B571A /* CalendarCell.swift */,
 				18D914A21FCFAE8C005B571A /* CalendarViewController.swift */,
-				18D914A61FD0807E005B571A /* CalendarTableViewCell.swift */,
 			);
 			path = Calendar;
 			sourceTree = "<group>";
@@ -467,10 +463,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-
 				183F7FE71FE6322800EB3B07 /* AddTodoViewUITests.swift in Sources */,
 				D035649B1FE5EF3300B900E4 /* EntriesUITests.swift in Sources */,
-				1820DC6C1FE5CB7A00196D54 /* CalendarAppUITests.swift in Sources */,
 				1820DC731FE5CB8600196D54 /* TodoUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -483,7 +477,6 @@
 				18D914A11FCFAE0E005B571A /* CalendarCell.swift in Sources */,
 				D01198981FCFB3CD00D9F917 /* EntriesTableViewController.swift in Sources */,
 				D0065A401FCF6C0C00978E46 /* CalendarApp.xcdatamodeld in Sources */,
-				18D914A71FD0807E005B571A /* CalendarTableViewCell.swift in Sources */,
 				186934D11FD104E6000E94B3 /* AddTodoViewController.swift in Sources */,
 				18F81E591FD0A53A00DFA8AA /* TodoTableViewController.swift in Sources */,
 				D0065A3A1FCF6C0C00978E46 /* ViewController.swift in Sources */,

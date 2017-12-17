@@ -10,13 +10,17 @@
 import UIKit
 import CoreData
 
+// this class represents the controller of the jounal entry table view
 class EntriesTableViewController: UITableViewController, UISearchBarDelegate {
 
+    // MARK: - properties
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var entries: [Entry] = []
     var filterEntries: [Entry] = []
     var selectedRow: Int!
     
+    
+    // This method is called after the view controller has loaded its view hierarchy into memory.
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -24,6 +28,7 @@ class EntriesTableViewController: UITableViewController, UISearchBarDelegate {
         setupNavBar()
     }
     
+    // this method sets up the navigation bar
     func setupNavBar(){
         //setup navigation bar
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -31,6 +36,7 @@ class EntriesTableViewController: UITableViewController, UISearchBarDelegate {
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 30),NSAttributedStringKey.foregroundColor: UIColor.white]
     }
     
+    // this method sets up the search bar
     func setupSearchBar(){
         //setup search bar
         let searchController = UISearchController(searchResultsController: nil)
@@ -42,6 +48,7 @@ class EntriesTableViewController: UITableViewController, UISearchBarDelegate {
         searchController.searchBar.backgroundColor = UIColor(red: 145/255, green: 190/255, blue: 231/255, alpha: 1.0)
     }
     
+    // this method tells the delegate that the user changed the search text.
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
 
         if (searchText.isEmpty || (searchBar.text?.isEmpty)!) {
@@ -52,6 +59,7 @@ class EntriesTableViewController: UITableViewController, UISearchBarDelegate {
         self.tableView.reloadData()
     }
     
+    // this method tells the delegate that the user finished editing the search text.
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         if (searchBar.text?.isEmpty)! {
             self.filterEntries = self.entries
@@ -59,12 +67,14 @@ class EntriesTableViewController: UITableViewController, UISearchBarDelegate {
         }
     }
 
+    // this method notifies the view controller that its view is about to be added to a view hierarchy.
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.fetchEntries()
 
     }
 
+    // this mthod fetches jounal entries store in coredata
     func fetchEntries() {
         do {
             entries = try context.fetch(Entry.fetchRequest())
@@ -75,7 +85,8 @@ class EntriesTableViewController: UITableViewController, UISearchBarDelegate {
         
         self.tableView.reloadData()
     }
-
+    
+    // this method is called when user taps on the entry
     @IBAction func ComposeDidClick(_ sender: Any) {
         self.performSegue(withIdentifier: "addNew", sender: nil)
     }
@@ -88,16 +99,19 @@ class EntriesTableViewController: UITableViewController, UISearchBarDelegate {
 
     // MARK: - Table view data source
    
+    // this method asks the data source to return the number of sections in the table view.
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
+    
+    // this method tells the data source to return the number of rows in a given section of a table view.
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return self.filterEntries.count
     }
 
-    
+    // this method asks the data source for a cell to insert in a particular location of the journal entry table view.
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 
@@ -130,6 +144,8 @@ class EntriesTableViewController: UITableViewController, UISearchBarDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
+    
+    // this method asks the delegate for the actions to display in response to a swipe in the specified row.
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let delete = UITableViewRowAction(style: .default, title: "Delete") { (action, indexPath) in
             
@@ -145,7 +161,7 @@ class EntriesTableViewController: UITableViewController, UISearchBarDelegate {
  
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    // this method notifies the view controller that a segue to "updatejournalview" is about to be performed.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "update" {
             let update = segue.destination as! UpdateJournalViewController

@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 
+// this class represents the controller of the todo table view 
 class TodoTableViewController: UITableViewController {
 
     @IBOutlet weak var showCompleted: UIBarButtonItem!
@@ -17,7 +18,10 @@ class TodoTableViewController: UITableViewController {
     var resultsController: NSFetchedResultsController<Todo>!
     var managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
-    
+    // This function is called after the view controller has loaded its view hierarchy into memory.
+    // It will request data from the persistent container,
+    // filter out all the todos that are not checked,
+    // and present to the tableview by ascending due date and title.
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavBar()
@@ -47,8 +51,8 @@ class TodoTableViewController: UITableViewController {
     
     }
     
+    //setup navigation bar
     func setupNavBar(){
-        //setup navigation bar
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "Todo"
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 30),NSAttributedStringKey.foregroundColor: UIColor.white]
@@ -56,10 +60,13 @@ class TodoTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
+    //this function tells the data source to return the number of rows in a given section of a table view.
+    //if there is not data yet, it will return 0
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return resultsController.sections?[section].numberOfObjects ?? 0
     }
 
+    // this function asks the NSManagedObjectResultsController for a cell to insert in a particular location of the table view.
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TodoCell", for: indexPath)
         let todo = resultsController.object(at: indexPath)
@@ -118,6 +125,8 @@ class TodoTableViewController: UITableViewController {
     }
     
     // MARK: - Table view delegate
+    
+    // this function returns the "delete" action to display on the trailing edge of the row
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let action = UIContextualAction(style: .destructive, title: "Delete") { ( action, view, completion) in
             let todo = self.resultsController.object(at: indexPath)
@@ -136,6 +145,7 @@ class TodoTableViewController: UITableViewController {
         return UISwipeActionsConfiguration(actions: [action])
     }
 
+    // this function returns the "check" action to display on the leading edge of the row.
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         //checked item won't have this action
         let todo = self.resultsController.object(at: indexPath)
@@ -168,7 +178,7 @@ class TodoTableViewController: UITableViewController {
   
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    // this function notifies the view controller that the AddTodoView segue is about to be performed.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let _ = sender as? UIBarButtonItem, let vc = segue.destination as? AddTodoViewController {
             vc.managedContext = resultsController.managedObjectContext
@@ -207,6 +217,7 @@ class TodoTableViewController: UITableViewController {
     }
 }
 
+
 extension TodoTableViewController:NSFetchedResultsControllerDelegate {
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.beginUpdates()
@@ -216,6 +227,7 @@ extension TodoTableViewController:NSFetchedResultsControllerDelegate {
         tableView.endUpdates()
     }
     
+    //this function notifies the receiver that a fetched object has been changed due to an add, remove, move, or update.
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         switch type {
         case .insert:

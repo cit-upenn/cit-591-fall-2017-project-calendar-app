@@ -9,6 +9,8 @@
 import UIKit
 import JTAppleCalendar
 
+// This is a class that represents a calendar cell.
+
 class CalendarCell: JTAppleCell {
     
      //MARK: - Outlets

@@ -10,6 +10,7 @@ import UIKit
 import JTAppleCalendar
 import CoreData
 
+// this class represents the controller of the calenda view
 class CalendarViewController: UIViewController {
     
     //MARK: - Outlets
@@ -33,9 +34,8 @@ class CalendarViewController: UIViewController {
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var entries: [Entry] = []
     var todayData: [AnyObject] = []
-//    var todayToDo: [Todo] = []
     
-    
+    //This method is called after the view controller has loaded its view hierarchy into memory.
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.delegate = self
@@ -49,7 +49,7 @@ class CalendarViewController: UIViewController {
         
     }
     
-
+    // this method notifies the view controller that its view is about to be added to a view hierarchy.
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.fetchData()
@@ -57,21 +57,21 @@ class CalendarViewController: UIViewController {
         calendarView.reloadData()
     }
     
-
+   
     //MARK: - Actions
 
+    // this method setup calendar spacing and labels
     func setupCalendarView(){
-        //setup calendar spacing
         calendarView.minimumLineSpacing = 0
         calendarView.minimumInteritemSpacing = 0
         
-        //setup labels
         calendarView.visibleDates { (monthDates) in
             self.setupViewsOfCalendar(from: monthDates)
         }
         
     }
     
+    // this method handels the text color of each cell
     func handleCellTextColor(cell: JTAppleCell?, cellState: CellState) {
         guard let cell = cell as? CalendarCell else {return}
         if cellState.isSelected {
@@ -81,6 +81,7 @@ class CalendarViewController: UIViewController {
         }
     }
     
+    // this method handels the cell that is been selected
     func handleCellSelected(cell: JTAppleCell?, cellState: CellState) {
         guard let cell = cell as? CalendarCell else {return}
         if cellState.isSelected {
@@ -90,6 +91,7 @@ class CalendarViewController: UIViewController {
         }
     }
     
+    // this method decides whether to show the event dot on certain cell
     func handleCellEvent(cell: JTAppleCell?, cellState: CellState) {
         guard let cell = cell as? CalendarCell else {return}
         formatter.dateFormat = "yyyy MM dd"
@@ -121,6 +123,7 @@ class CalendarViewController: UIViewController {
         cell.eventDot.isHidden = !(containsTodo || containsJournal)
     }
     
+    // this method sets up the calendar and displays the year&month headers
     func setupViewsOfCalendar(from visibleDates: DateSegmentInfo){
         let date = visibleDates.monthDates.first!.date
         
@@ -141,6 +144,7 @@ class CalendarViewController: UIViewController {
 
 //MARK: - calendar view data source
 extension CalendarViewController: JTAppleCalendarViewDataSource{
+    // this method configures each calendar cell
     func calendar(_ calendar: JTAppleCalendarView, willDisplay cell: JTAppleCell, forItemAt date: Date, cellState: CellState, indexPath: IndexPath) {
         let cell = calendar.dequeueReusableJTAppleCell(withReuseIdentifier: "CalendarCell", for: indexPath) as! CalendarCell
         cell.dateLabel.text = cellState.text
@@ -149,6 +153,7 @@ extension CalendarViewController: JTAppleCalendarViewDataSource{
         handleCellEvent(cell: cell, cellState: cellState)
     }
     
+    // this method asks the data source to return the start and end boundary dates as well as the calendar to use.
     func configureCalendar(_ calendar: JTAppleCalendarView) -> ConfigurationParameters {
         formatter.dateFormat = "yyyy MM dd"
         formatter.timeZone = Calendar.current.timeZone
@@ -156,7 +161,6 @@ extension CalendarViewController: JTAppleCalendarViewDataSource{
         
         let startDate = formatter.date(from: "1999 01 01")!
         let endDate = formatter.date(from: "2200 12 31")!
-        
         
         let parameters = ConfigurationParameters(startDate: startDate, endDate: endDate, numberOfRows: 6, generateInDates: .forAllMonths, generateOutDates: .off, firstDayOfWeek: .sunday, hasStrictBoundaries: true)
         return parameters
@@ -167,7 +171,7 @@ extension CalendarViewController: JTAppleCalendarViewDataSource{
 // MARK: - calendar view delegate
 extension CalendarViewController: JTAppleCalendarViewDelegate {
     
-    //display the cell
+    //this method tells the delegate that the JTAppleCalendar is about to display a date-cell.
     func calendar(_ calendar: JTAppleCalendarView, cellForItemAt date: Date, cellState: CellState, indexPath: IndexPath) -> JTAppleCell {
         let cell = calendar.dequeueReusableJTAppleCell(withReuseIdentifier: "CalendarCell", for: indexPath) as! CalendarCell
         cell.dateLabel.text = cellState.text
@@ -182,6 +186,7 @@ extension CalendarViewController: JTAppleCalendarViewDelegate {
         return cell
     }
     
+    // this method tells the delegate that the JTAppleCalendar is about to display a date-cell.
     func calendar(_ calendar: JTAppleCalendarView, didSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
         guard (cell as? CalendarCell) != nil else {return}
         handleCellTextColor(cell: cell, cellState: cellState)
@@ -192,6 +197,7 @@ extension CalendarViewController: JTAppleCalendarViewDelegate {
 
     }
     
+    // this method tells the delegate that a date-cell with a specified date was de-selected
     func calendar(_ calendar: JTAppleCalendarView, didDeselectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
         guard (cell as? CalendarCell) != nil else {return}
         handleCellTextColor(cell: cell, cellState: cellState)
@@ -199,6 +205,7 @@ extension CalendarViewController: JTAppleCalendarViewDelegate {
         handleCellEvent(cell: cell, cellState: cellState)
     }
     
+    // this method tells the delegate that the calendar view scrolled to a segment beginning and ending with a particular date
     func calendar(_ calendar: JTAppleCalendarView, didScrollToDateSegmentWith visibleDates: DateSegmentInfo) {
         setupViewsOfCalendar(from: visibleDates)
     }
@@ -206,6 +213,7 @@ extension CalendarViewController: JTAppleCalendarViewDelegate {
 
 //MARK: - fetch data
 extension CalendarViewController{
+    // this method fetchs entries from core data and returns all the entries stored
     func getCoreDataEvents() -> [AnyObject] {
         var entries = [AnyObject]()
         
@@ -232,6 +240,7 @@ extension CalendarViewController{
 
 // MARK: - UIColor
 extension UIColor {
+    // this method allows to set color by given hex value 
     convenience init(colorWithHexValue value: Int, alpha:CGFloat = 1.0) {
         self.init (
             red: CGFloat((value & 0xFF0000) >> 16) / 255.0,
@@ -245,6 +254,7 @@ extension UIColor {
 extension CalendarViewController: UITableViewDataSource, UITableViewDelegate{
     
     // MARK: - Table view data source
+    // this function fetches data from CoreDate stack.
     func fetchData() {
         //setup predicate
         var calendar = Calendar.current
@@ -273,14 +283,17 @@ extension CalendarViewController: UITableViewDataSource, UITableViewDelegate{
         self.tableView.reloadData()
     }
     
+    //this method asks the data source to return the number of sections in the table view.
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
+    // this method tells the data source to return the number of rows in a given section of a table view.
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return todayData.count
     }
     
+    // this method asks coredata stack for a cell to insert in a particular location of the table view.
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "tableCell", for: indexPath)
         let data = todayData.reversed()[indexPath.row]
@@ -323,6 +336,7 @@ extension CalendarViewController: UITableViewDataSource, UITableViewDelegate{
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
+    // this method asks the delegate for the actions to display in response to a swipe in the specified row
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let delete = UITableViewRowAction(style: .default, title: "Delete") { (action, indexPath) in
             
@@ -359,6 +373,7 @@ extension CalendarViewController: UITableViewDataSource, UITableViewDelegate{
         return [delete]
     }
     
+    //this method notifies the view controller that the storyboard is about to be performed.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "updateJournalFromCalendar" {
             let update = segue.destination as! UpdateJournalViewController

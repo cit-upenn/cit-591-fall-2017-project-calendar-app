@@ -9,16 +9,20 @@
 
 import UIKit
 
+// this class represents a controller of the updatejournal view
 class UpdateJournalViewController: UIViewController, UITextViewDelegate {
     
+    // MARK: - properties
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var entry: Entry!
 
+    // MARK: - outlets
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var dateLabel: UILabel!
     
     
+    // this method is perform when the user updates and save the change
     @IBAction func saveClick(_ sender: Any) {
         guard let updateText = textView.text else {
             return
@@ -27,6 +31,7 @@ class UpdateJournalViewController: UIViewController, UITextViewDelegate {
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
         self.navigationController?.popToRootViewController(animated: true)
     }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +53,7 @@ class UpdateJournalViewController: UIViewController, UITextViewDelegate {
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 30),NSAttributedStringKey.foregroundColor: UIColor.white]
     }
     
+    // this method displays the journal's content that's already been saved
     func displayExistedEntry() {
         guard let existedEntry = entry.bodyText else {
             return
